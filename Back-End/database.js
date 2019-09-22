@@ -33,12 +33,8 @@ let workersSchema = new mongoose.Schema({
     type: String,
     require: true
   },
-  age: {
-    type: Number,
-    required: true
-  },
   experience: {
-    type: String,
+    type: Number,
     required: true
   },
   field: {
