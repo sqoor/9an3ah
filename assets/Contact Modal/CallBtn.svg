@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="64" viewBox="0 0 160 64">
+  <g id="CallBtn" transform="translate(-28 -598)">
+    <rect id="Rectangle_10" data-name="Rectangle 10" width="160" height="64" rx="10" transform="translate(28 598)" fill="#ffe346"/>
+    <text id="اتصال" transform="translate(81 639)" fill="#fff" font-size="22" font-family="SegoeUI-Bold, Segoe UI" font-weight="700"><tspan x="0" y="0">اتصال</tspan></text>
+  </g>
+</svg>

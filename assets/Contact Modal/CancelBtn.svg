@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="64" viewBox="0 0 160 64">
+  <g id="CancelBtn" transform="translate(-201 -598)">
+    <rect id="Rectangle_11" data-name="Rectangle 11" width="160" height="64" rx="10" transform="translate(201 598)" fill="#fd8469"/>
+    <text id="الغاء" transform="translate(261 639)" fill="#fff" font-size="22" font-family="SegoeUI-Bold, Segoe UI" font-weight="700"><tspan x="0" y="0">الغاء</tspan></text>
+  </g>
+</svg>
