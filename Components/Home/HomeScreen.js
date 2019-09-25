@@ -1,16 +1,57 @@
 import React from 'react';
-import { View, Text, StyleSheet, TextInput, Icon } from 'react-native'
+import { View, Text, StyleSheet, TextInput, Icon, Image } from 'react-native'
 import CategoryItem from './CategoryItem'
+import { Dropdown } from 'react-native-material-dropdown';
 const HomeScreen = () => {
+    let data = [
+        {
+            value: 'اربد',
+        },
+        {
+            value: 'عمّان',
+        },
+        {
+            value: 'جرش',
+        },
+        {
+            value: 'عجلون',
+        },
+        {
+            value: 'المفرق',
+        },
+        {
+            value: 'مأدبا',
+        },
+        {
+            value: 'معان',
+        },
+        {
+            value: 'الطفيلة',
+        },
+        {
+            value: 'العقبة',
+        },
+        {
+            value: 'الكرك',
+        },
+        {
+            value: 'الزرقاء',
+        }
+        ,
+        {
+            value: 'السلط',
+        }
+    ];
     return (
         <View>
             <View style={styles.bar}>
-                <View style={styles.searchInputContainer}>
-                    {/* <Icon style={styles.searchIcon} name="search" size={20} color="#A7A7A7" /> */}
+                <View style={styles.searchSection}>
+                    <Image style={styles.profileIcon} source={require('../../assets/Home/man.png')} />
                     <TextInput style={styles.input} placeholder='ابحث عن فنّي ...' placeholderTextColor='#A7A7A7'></TextInput>
                 </View>
+                <Dropdown label='اختار المحافظة ...' data={data} />
             </View>
-        </View>
+        </View >
     );
 }
 
@@ -20,26 +61,30 @@ const styles = StyleSheet.create({
         height: '60%',
         width: '100%',
     },
-    searchInputContainer: {
-        width: '70%',
-        flex: 1,
+    searchSection: {
+        marginTop: 38,
+        marginLeft: 10,
+        marginRight: 10,
         flexDirection: 'row',
-        justifyContent: 'center',
+        justifyContent: 'space-around',
         alignItems: 'center',
-        backgroundColor: '#fff',
-    },
-    searchIcon: {
-        padding: 10,
     },
     input: {
-        flex: 1,
+        flex: 2.5,
         paddingTop: 10,
-        paddingRight: 10,
+        paddingRight: 20,
         paddingBottom: 10,
-        paddingLeft: 0,
-        backgroundColor: '#fff',
+        paddingLeft: 10,
+        backgroundColor: '#FFF',
         color: '#424242',
+        borderRadius: 25
     },
+    profileIcon: {
+        flex: 0.5,
+        width: 40,
+        height: 40,
+        resizeMode: "contain"
+    }
 })
 
 export default HomeScreen;
