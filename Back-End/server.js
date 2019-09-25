@@ -1,12 +1,22 @@
 const express = require("express");
 const cors = require("cors");
 const mongo = require("./database");
-
 const app = express();
+
 app.use(express.json());
 app.use(cors());
 
 
+// let filterSearch = (searchObject) => {
+//   if (searchObject.name === '') {
+//     delete searchObject.name;
+//   } else if (searchObject.location === '') {
+//     delete searchObject.location
+//   } else if (searchObject.category === '') {
+//     delete searchObject.category
+//   }
+//   return searchObject;
+// }
 
 // @GET
 // Return All Workers From Database
@@ -16,9 +26,26 @@ app.get('/workers', (req, res) => {
   })
 })
 
+// @GET
+// Return Specific Workers From Database
+app.get('/specific-workers', (req, res) => {
+  mongo.findWorkers(req.body, result => {
+    res.json(result)
+  })
+})
+
+// @GET
+// Return Specific Workers From Database
+app.get('/workers/:id', (req, res) => {
+  let workerID = req.params.id; 
+  mongo.findOneWorker(workerID, result => {
+    res.json(result)
+  })
+})
+
 // @POST
 // Add New Worker To Database.
-app.post('/worker', (req, res) => {
+app.post('/workers', (req, res) => {
   mongo.addNewWorker(req.body, (response) => {
     res.json(response);
   })
@@ -26,9 +53,9 @@ app.post('/worker', (req, res) => {
 
 // @PUT
 // Update Worker Information.
-app.put('/worker/:id/:info', (req, res) => {
+app.put('/workers/:id', (req, res) => {
   let workerID = req.params.id
-  let newWorkerInfo = req.params.info;
+  let newWorkerInfo = req.body;
   mongo.updateWorkerInfo(workerID, newWorkerInfo, response => {
     res.json(response)
   })
