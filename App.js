@@ -1,10 +1,14 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View ,Button } from 'react-native';
+import ProfileScreen from './Components/Profile/ProfileScreen';
+import ModalExample from './Components/Profile/ModalExample'
+import EditProfile from './Components/Profile/EditProfile'
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <EditProfile/>
+      
     </View>
   );
 }
@@ -13,7 +17,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
