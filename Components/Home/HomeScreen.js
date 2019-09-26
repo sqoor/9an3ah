@@ -1,12 +1,15 @@
-import React from 'react';
-import { View, Text, StyleSheet, TextInput, ScrollView, Image } from 'react-native'
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, TextInput, ScrollView, Image, FlatList } from 'react-native'
 import { Dropdown } from 'react-native-material-dropdown';
 import CategoriesList from './CategoriesList';
-import GridList from 'react-native-grid-list';
-import WorkerListItem from './WorkerListItem'
+import WorkerListItem from './WorkerListItem';
+
 
 const HomeScreen = () => {
-    let data = [
+
+    const [workers, setWorkers] = useState([]);
+
+    let cities = [
         {
             value: 'اربد',
         },
@@ -46,16 +49,25 @@ const HomeScreen = () => {
         }
     ];
 
-    const items = [
-        { thumbnail: { uri: 'https://lorempixel.com/200/200/animals' } },
-        { thumbnail: { uri: 'https://lorempixel.com/200/200/city' } },
-        { thumbnail: { uri: 'https://lorempixel.com/200/200/nature' } },
-        { thumbnail: { uri: 'https://lorempixel.com/200/200/cats' } },
-    ];
-
-      renderItem = ({ item, index }) => (
-        <WorkerListItem img='' name='' field='' location='' />
-      );
+    let items = [
+        { img: require('../../assets/Home/avatar.png'), name: 'Mohamad', field: 'مبرمج', location: 'عمّان' },
+        { img: require('../../assets/Home/avatar.png'), name: 'Mohamad', field: 'مبرمج', location: 'عمّان' },
+        { img: require('../../assets/Home/avatar.png'), name: 'Mohamad', field: 'مبرمج', location: 'عمّان' },
+        { img: require('../../assets/Home/avatar.png'), name: 'Mohamad', field: 'مبرمج', location: 'عمّان' },
+        { img: require('../../assets/Home/avatar.png'), name: 'Mohamad', field: 'مبرمج', location: 'عمّان' },
+        { img: require('../../assets/Home/avatar.png'), name: 'Mohamad', field: 'مبرمج', location: 'عمّان' },
+        { img: require('../../assets/Home/avatar.png'), name: 'Mohamad', field: 'مبرمج', location: 'عمّان' },
+        { img: require('../../assets/Home/avatar.png'), name: 'Mohamad', field: 'مبرمج', location: 'عمّان' },
+        { img: require('../../assets/Home/avatar.png'), name: 'Mohamad', field: 'مبرمج', location: 'عمّان' },
+    ]
+    let renderItem = ({ item, index }) => {
+        if (item.empty === true) {
+            // return <View style={[styles.item, styles.itemInvisible]} />;
+        }
+        return (
+            <WorkerListItem img={item.img} name={item.name} field={item.field} location={item.location} />
+        );
+    };
 
     return (
         <View>
@@ -64,15 +76,16 @@ const HomeScreen = () => {
                     <Image style={styles.profileIcon} source={require('../../assets/Home/man.png')} />
                     <TextInput style={styles.input} placeholder='ابحث عن فنّي ...' placeholderTextColor='#A7A7A7'></TextInput>
                 </View>
-                <Dropdown label='اختار المحافظة ...' data={data} />
+                <Dropdown label='اختار المحافظة ...' data={cities} />
                 <CategoriesList />
             </View>
+
             <ScrollView style={styles.container}>
-                <GridList
-                    showSeparator
+                <FlatList
                     data={items}
-                    numColumns={2}
+                    style={styles.gridView}
                     renderItem={renderItem}
+                    numColumns={2}
                 />
             </ScrollView>
 
@@ -81,6 +94,10 @@ const HomeScreen = () => {
 }
 
 const styles = StyleSheet.create({
+    gridView: {
+        flex: 1,
+        marginVertical: 20,
+    },
     bar: {
         backgroundColor: '#FFE346',
         height: '60%',
