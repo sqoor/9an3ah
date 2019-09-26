@@ -51,7 +51,7 @@ let workersSchema = new mongoose.Schema({
 let Workers = mongoose.model('Workers', workersSchema);
 
 // @METHOD 'getWorkers'
-// Return All Workers From Database
+// Return All Workers.
 let getWorkers = (callBack) => {
   console.log(callBack);
   Workers.find({}, (error, response) => {
@@ -63,8 +63,35 @@ let getWorkers = (callBack) => {
   })
 }
 
+// @METHOD 'findWorkers'
+// Return Specific Workers.
+let findWorkers = (searchObject, callBack) => {
+  console.log(callBack);
+  Workers.find(searchObject, (error, response) => {
+    if (error) {
+      callBack(error);
+    } else {
+      callBack(response);
+    }
+  })
+}
+
+// @METHOD 'findOneWorker'
+// Return One Worker By His ID.
+let findOneWorker = (workerID, callBack) => {
+  console.log(callBack);
+  Workers.find({ _id: workerID }, (error, response) => {
+    if (error) {
+      callBack(error);
+    } else {
+      callBack(response);
+    }
+  })
+}
+
+
 // @METHOD
-// Add Specific Worker To Database.
+// Add Specific Worker.
 let addNewWorker = (newWorker, callBack) => {
   Workers.create(newWorker, (error, response) => {
     if (error) {
@@ -76,10 +103,21 @@ let addNewWorker = (newWorker, callBack) => {
 }
 
 // @ METHOD
-// Update Private Status Of a Specific Worker In Database.
+// Update Worker Information.
 let updateWorkerInfo = (workerID, newWorkerInfo, callBack) => {
   console.log('Workers', Workers)
-  Workers.updateOne({ _id: workerID }, { $set: { status: newWorkerInfo } }, (error, response) => {
+  Workers.updateMany({ _id: workerID }, {
+    $set: {
+      fullName: newWorkerInfo.fullName,
+      email: newWorkerInfo.email,
+      password: newWorkerInfo.password,
+      phoneNumber: newWorkerInfo.phoneNumber,
+      location: newWorkerInfo.location,
+      experience: newWorkerInfo.experience,
+      field: newWorkerInfo.field,
+      hourlyFare: newWorkerInfo.hourlyFare
+    }
+  }, (error, response) => {
     if (error) {
       callBack(error)
     } else {
@@ -89,7 +127,7 @@ let updateWorkerInfo = (workerID, newWorkerInfo, callBack) => {
 }
 
 // @ METHOD
-// Delete Specific Worker From Database.
+// Delete Specific Worker.
 let deleteWorkerAccount = (workerID, callBack) => {
   Workers.findOneAndDelete({ _id: workerID }, (error, response) => {
     if (error) {
@@ -105,5 +143,7 @@ module.exports = {
   getWorkers,
   addNewWorker,
   updateWorkerInfo,
-  deleteWorkerAccount
+  deleteWorkerAccount,
+  findWorkers,
+  findOneWorker
 }
