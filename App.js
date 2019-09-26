@@ -1,14 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View ,Button } from 'react-native';
-import ProfileScreen from './Components/Profile/ProfileScreen';
-import ModalExample from './Components/Profile/ModalExample'
-import EditProfile from './Components/Profile/EditProfile'
-
+import { StyleSheet, Text, View } from 'react-native';
+import HomeScreen from './Components/Home/HomeScreen'
 export default function App() {
   return (
     <View style={styles.container}>
-      <EditProfile/>
-      
+      <HomeScreen/>
+
     </View>
   );
 }
