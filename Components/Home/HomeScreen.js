@@ -50,22 +50,22 @@ const HomeScreen = () => {
     ];
 
     let items = [
-        { img: require('../../assets/Home/avatar.png'), name: 'Mohamad', field: 'مبرمج', location: 'عمّان' },
-        { img: require('../../assets/Home/avatar.png'), name: 'Mohamad', field: 'مبرمج', location: 'عمّان' },
-        { img: require('../../assets/Home/avatar.png'), name: 'Mohamad', field: 'مبرمج', location: 'عمّان' },
-        { img: require('../../assets/Home/avatar.png'), name: 'Mohamad', field: 'مبرمج', location: 'عمّان' },
-        { img: require('../../assets/Home/avatar.png'), name: 'Mohamad', field: 'مبرمج', location: 'عمّان' },
-        { img: require('../../assets/Home/avatar.png'), name: 'Mohamad', field: 'مبرمج', location: 'عمّان' },
-        { img: require('../../assets/Home/avatar.png'), name: 'Mohamad', field: 'مبرمج', location: 'عمّان' },
-        { img: require('../../assets/Home/avatar.png'), name: 'Mohamad', field: 'مبرمج', location: 'عمّان' },
-        { img: require('../../assets/Home/avatar.png'), name: 'Mohamad', field: 'مبرمج', location: 'عمّان' },
+        { key: 1, img: require('../../assets/Home/avatar.png'), name: 'محمد', field: 'مبرمج', location: 'عمّان' },
+        { key: 2, img: require('../../assets/Home/avatar.png'), name: 'محمد', field: 'مبرمج', location: 'عمّان' },
+        { key: 3, img: require('../../assets/Home/avatar.png'), name: 'محمد', field: 'مبرمج', location: 'عمّان' },
+        { key: 4, img: require('../../assets/Home/avatar.png'), name: 'محمد', field: 'مبرمج', location: 'عمّان' },
+        { key: 5, img: require('../../assets/Home/avatar.png'), name: 'محمد', field: 'مبرمج', location: 'عمّان' },
+        { key: 6, img: require('../../assets/Home/avatar.png'), name: 'محمد', field: 'مبرمج', location: 'عمّان' },
+        { key: 7, img: require('../../assets/Home/avatar.png'), name: 'محمد', field: 'مبرمج', location: 'عمّان' },
+        { key: 8, img: require('../../assets/Home/avatar.png'), name: 'محمد', field: 'مبرمج', location: 'عمّان' },
+        { key: 9, img: require('../../assets/Home/avatar.png'), name: 'محمد', field: 'مبرمج', location: 'عمّان' },
     ]
     let renderItem = ({ item, index }) => {
         if (item.empty === true) {
             // return <View style={[styles.item, styles.itemInvisible]} />;
         }
         return (
-            <WorkerListItem img={item.img} name={item.name} field={item.field} location={item.location} />
+            <WorkerListItem key={index} img={item.img} name={item.name} field={item.field} location={item.location} />
         );
     };
 
@@ -83,24 +83,20 @@ const HomeScreen = () => {
             <ScrollView style={styles.container}>
                 <FlatList
                     data={items}
-                    style={styles.gridView}
+                    // style={styles.gridView}
                     renderItem={renderItem}
                     numColumns={2}
                 />
             </ScrollView>
-
         </View >
     );
 }
 
 const styles = StyleSheet.create({
-    gridView: {
-        flex: 1,
-        marginVertical: 20,
-    },
+  
     bar: {
         backgroundColor: '#FFE346',
-        height: '60%',
+        height: '28%',
         width: '100%',
     },
     searchSection: {
@@ -126,10 +122,6 @@ const styles = StyleSheet.create({
         width: 40,
         height: 40,
         resizeMode: "contain"
-    },
-    container: {
-        flex: 1,
-        backgroundColor: 'white',
     },
     image: {
         width: '100%',

@@ -6,7 +6,7 @@ const WorkerListItem = (props) => {
         <View style={styles.item}>
             <Image style={styles.img} source={props.img} />
             <View style={styles.txtContainer}>
-                <Text style={styles.text}>{props.name}</Text>
+                <Text style={styles.text, styles.nameTxt}>{props.name}</Text>
                 <Text style={styles.text}>{props.field}</Text>
                 <Text style={styles.text}>{props.location}</Text>
             </View>
@@ -15,29 +15,39 @@ const WorkerListItem = (props) => {
 }
 const styles = StyleSheet.create({
     item: {
-        width: 150,
+        width: '50%',
+        // flex: 1,
         borderRadius: 20,
-        borderWidth: 2,
-        borderColor: '#000',
-        justifyContent: "space-between",
-        // shadowOffset: { width: 0, height: 2 },
-        // shadowColor: '#000',
-        // shadowOpacity: 0.8,
-        // shadowRadius: 2,
-        // elevation: 6
+        justifyContent: "center",
+        margin: 8,
+        shadowOffset: { width: 2, height: 0 },
+        shadowColor: '#000',
+        shadowOpacity: 0.8,
+        shadowRadius: 2,
+        elevation: 2
     },
     img: {
-        flex: 2,
         resizeMode: "contain",
-        width: 150
+        width: '100%',
+
     },
     text: {
-        flex: 1,
-        margin:5
+        flex:1,
+    },
+    nameTxt: {
+        fontSize: 24,
+        fontWeight: "bold"
+    },
+    infoTxt: {
+        fontSize: 18,
+        color:'#A7A7A7',
     },
     txtContainer: {
-        padding:10,
-        flex: 1,
+        width: '70%',
+        alignSelf: "flex-end",
+        marginEnd: 10,
+        marginStart: 10,
+        paddingBottom:10
     }
 })
 
