@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native'
+import { View, Text, StyleSheet, Image } from 'react-native';
+
 
 const WorkerListItem = (props) => {
     return (
@@ -15,20 +16,20 @@ const WorkerListItem = (props) => {
 }
 const styles = StyleSheet.create({
     item: {
-        width: '50%',
-        // flex: 1,
+        width: '46%',
         borderRadius: 20,
         justifyContent: "center",
         margin: 8,
-        shadowOffset: { width: 2, height: 0 },
+        elevation: 4,
+        shadowOffset:{width: 2, height: 2},
         shadowColor: '#000',
-        shadowOpacity: 0.8,
         shadowRadius: 2,
-        elevation: 2
+        shadowOpacity: 0.8,
     },
     img: {
         resizeMode: "contain",
         width: '100%',
+        marginHorizontal: 2
 
     },
     text: {

@@ -1,13 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TextInput, ScrollView, Image, FlatList } from 'react-native'
+import { View, StyleSheet, TextInput, ScrollView, Image, FlatList, Platform, Dimensions } from 'react-native'
 import { Dropdown } from 'react-native-material-dropdown';
 import CategoriesList from './CategoriesList';
 import WorkerListItem from './WorkerListItem';
+import axios from 'axios'
 
 
 const HomeScreen = () => {
 
     const [workers, setWorkers] = useState([]);
+
+    useEffect(() => {
+        axios.get('https://san3ah.herokuapp.com/workers')
+            .then(response => {
+                console.log('RESPONSE', response)
+                console.log('DATA', response.data)
+                setWorkers([response.data])
+                console.log('WORKERS', workers)
+            })
+            .catch(error => {
+                alert(error);
+            })
+    }, [])
 
     let cities = [
         {
@@ -78,12 +92,12 @@ const HomeScreen = () => {
                 </View>
                 <Dropdown label='اختار المحافظة ...' data={cities} />
                 <CategoriesList />
+
             </View>
 
             <ScrollView style={styles.container}>
                 <FlatList
                     data={items}
-                    // style={styles.gridView}
                     renderItem={renderItem}
                     numColumns={2}
                 />
