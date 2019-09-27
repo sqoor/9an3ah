@@ -10,6 +10,7 @@ const HomeScreen = () => {
 
     // Hook State To Contain Array Of Workers.
     const [workers, setWorkers] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
 
     // @METHOD GET
     // Fetch Workers Data From Database.
@@ -83,30 +84,36 @@ const HomeScreen = () => {
         { key: 9, img: require('../../assets/Home/avatar.png'), name: 'محمد', field: 'مبرمج', location: 'عمّان' },
     ]
 
-
-    /*    let renderItem = ({ item, index }) => {
-           if (item.empty === true) {
-               // return <View style={[styles.item, styles.itemInvisible]} />;
-           }
-           return (
-               <WorkerListItem img={item.img} name={item.name} field={item.field} location={item.location} />
-           );
-       }; */
+    // Get User Search Term. 
+    const searchHandler = (enteredTerm) => {
+        setSearchTerm(enteredTerm);
+    };
 
     return (
         <View>
+            {/* App Bar */}
             <View style={styles.bar}>
+                {/* Search & Profile Avatar*/}
                 <View style={styles.searchSection}>
                     <Image style={styles.profileIcon} source={require('../../assets/Home/man.png')} />
-                    <TextInput style={styles.input} placeholder='ابحث عن فنّي ...' placeholderTextColor='#A7A7A7'></TextInput>
-                </View>
-                <Dropdown label='اختار المحافظة ...' data={cities} />
-                <CategoriesList />
+                    <TextInput
+                        style={styles.input}
+                        placeholder='ابحث عن فنّي ...'
+                        placeholderTextColor='#A7A7A7'
+                        onChangeText={searchHandler}
+                        value={searchTerm}>
 
+                    </TextInput>
+                </View>
+                {/* "JORDAN" Cities List */}
+                <Dropdown label='اختار المحافظة ...' data={cities} />
+                {/* Workers Fields Categories Component */}
+                <CategoriesList />
             </View>
 
+            {/* Workers List */}
             <FlatList
-            /* keyExtractor = {(item, index) => item.id}  Get Unique Key For every Item In flat List*/
+                /* keyExtractor = {(item, index) => item.id}  Get Unique Key For every Item In flat List*/
                 data={items}
                 renderItem={result => (<WorkerListItem img={result.item.img} name={result.item.name} field={result.item.field} location={result.item.location} />)}
                 numColumns={2}
