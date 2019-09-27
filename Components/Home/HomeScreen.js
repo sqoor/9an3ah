@@ -105,14 +105,12 @@ const HomeScreen = () => {
 
             </View>
 
-            {/* <ScrollView style={styles.container}> */}
             <FlatList
             /* keyExtractor = {(item, index) => item.id}  Get Unique Key For every Item In flat List*/
                 data={items}
                 renderItem={result => (<WorkerListItem img={result.item.img} name={result.item.name} field={result.item.field} location={result.item.location} />)}
                 numColumns={2}
             />
-            {/* </ScrollView> */}
         </View >
     );
 }
