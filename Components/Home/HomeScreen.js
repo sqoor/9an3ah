@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, TextInput, ScrollView, Image, FlatList, Platform, Dimensions } from 'react-native'
+import { View, StyleSheet, TextInput, ScrollView, Image, FlatList } from 'react-native'
 import { Dropdown } from 'react-native-material-dropdown';
 import CategoriesList from './CategoriesList';
 import WorkerListItem from './WorkerListItem';
@@ -10,18 +10,21 @@ const HomeScreen = () => {
 
     const [workers, setWorkers] = useState([]);
 
-    useEffect(() => {
+    function fetchData() {
+
         axios.get('https://san3ah.herokuapp.com/workers')
             .then(response => {
                 console.log('RESPONSE', response)
                 console.log('DATA', response.data)
-                setWorkers([response.data])
+                setWorkers(response.data)
                 console.log('WORKERS', workers)
             })
             .catch(error => {
                 alert(error);
             })
-    }, [])
+    }
+
+    useEffect(() => fetchData(), [])
 
     let cities = [
         {
@@ -95,13 +98,13 @@ const HomeScreen = () => {
 
             </View>
 
-            <ScrollView style={styles.container}>
+            {/* <ScrollView style={styles.container}> */}
                 <FlatList
                     data={items}
                     renderItem={renderItem}
                     numColumns={2}
                 />
-            </ScrollView>
+            {/* </ScrollView> */}
         </View >
     );
 }
