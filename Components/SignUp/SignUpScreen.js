@@ -26,8 +26,8 @@ class SignUpScreen extends React.Component {
     field: ""
   };
 
-  submitHander = () => {
-    const newuser = {
+  submitHandler = () => {
+    const newUser = {
       fullName: this.state.fullName.trim().toLowerCase(),
       email: this.state.email.trim().toLowerCase(),
       password: this.state.password.trim().toLowerCase(),
@@ -40,7 +40,7 @@ class SignUpScreen extends React.Component {
 
     axios
       // .post("https://san3ah.herokuapp.com/workers", user)
-      .post("http://192.168.43.147:9000/workers", newuser)
+      .post("http://192.168.43.147:9000/workers", newUser)
       .then(res => {
         console.log(res.data);
         
@@ -103,7 +103,7 @@ class SignUpScreen extends React.Component {
               style={{ height: 50, width: 100, color: "white" }}
               onValueChange={text => this.setState({ field: text })}
             >
-              <Picker.Item label="المهنة" value="" />
+              <Picker.Item label="المهنة" value=""  />
               <Picker.Item label="حداد" value="حداد" />
               <Picker.Item label="موسارجي" value="موسارجي" />
               <Picker.Item label="نجار" value="نجار" />
