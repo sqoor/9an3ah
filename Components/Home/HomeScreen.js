@@ -93,7 +93,7 @@ const HomeScreen = () => {
 }
 
 const styles = StyleSheet.create({
-  
+
     bar: {
         backgroundColor: '#FFE346',
         height: '28%',
