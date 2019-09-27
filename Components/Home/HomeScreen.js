@@ -8,10 +8,12 @@ import axios from 'axios'
 
 const HomeScreen = () => {
 
+    // Hook State To Contain Array Of Workers.
     const [workers, setWorkers] = useState([]);
 
+    // @METHOD GET
+    // Fetch Workers Data From Database.
     function fetchData() {
-
         axios.get('https://san3ah.herokuapp.com/workers')
             .then(response => {
                 console.log('RESPONSE', response)
@@ -24,8 +26,10 @@ const HomeScreen = () => {
             })
     }
 
+    // Execute "fetchData" Method Once The Component Open.
     useEffect(() => fetchData(), [])
 
+    // Array Of "JORDAN" Cities.
     let cities = [
         {
             value: 'اربد',
@@ -66,6 +70,7 @@ const HomeScreen = () => {
         }
     ];
 
+    // Static Data To Test The List Of Workers.
     let items = [
         { key: 1, img: require('../../assets/Home/avatar.png'), name: 'محمد', field: 'مبرمج', location: 'عمّان' },
         { key: 2, img: require('../../assets/Home/avatar.png'), name: 'محمد', field: 'مبرمج', location: 'عمّان' },
@@ -77,6 +82,8 @@ const HomeScreen = () => {
         { key: 8, img: require('../../assets/Home/avatar.png'), name: 'محمد', field: 'مبرمج', location: 'عمّان' },
         { key: 9, img: require('../../assets/Home/avatar.png'), name: 'محمد', field: 'مبرمج', location: 'عمّان' },
     ]
+
+    // 
     let renderItem = ({ item, index }) => {
         if (item.empty === true) {
             // return <View style={[styles.item, styles.itemInvisible]} />;
