@@ -10,6 +10,8 @@ import {
   Image
 } from "react-native";
 
+import axios from 'axios';
+
 import logo from './logo.png';
 
 class SignUpScreen extends React.Component {
@@ -25,11 +27,27 @@ class SignUpScreen extends React.Component {
   };
 
   submitHander = () => {
-    /* Axios.post("url", this.state)
-    .then(res => console.log(res))
-    .catch(err => console.log(err)); */
+    const newuser = {
+      fullName: this.state.fullName.trim().toLowerCase(),
+      email: this.state.email.trim().toLowerCase(),
+      password: this.state.password.trim().toLowerCase(),
+      phoneNumber: this.state.phoneNumber.trim().toLowerCase(),
+      location: this.state.location.trim().toLowerCase(),
+      hourlyFare: this.state.hourlyFare.trim().toLowerCase(),
+      experience: this.state.experience.trim().toLowerCase(),
+      field: this.state.field.trim().toLowerCase()
+    };
 
-    console.log(this.state);
+    axios
+      // .post("https://san3ah.herokuapp.com/workers", user)
+      .post("http://192.168.43.147:9000/workers", newuser)
+      .then(res => {
+        console.log(res.data);
+        
+        // if (res.data.length) alert(`Welcome ${res.data[0].fullName}`);
+        // else alert("Email and password do not match");
+      })
+      .catch(err => console.log("ERROR", err));
   };
 
   render() {
