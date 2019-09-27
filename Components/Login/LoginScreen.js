@@ -20,7 +20,7 @@ class LoginScreen extends React.Component {
 
   submitHandler = e => {
     const user = {
-      email: this.state.email.trim(),
+      email: this.state.email.trim().toLowerCase(),
       password: this.state.password.trim()
     };
 
