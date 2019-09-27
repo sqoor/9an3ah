@@ -18,7 +18,7 @@ const HomeScreen = () => {
             .then(response => {
                 console.log('RESPONSE', response)
                 console.log('DATA', response.data)
-                setWorkers(response.data)
+                setWorkers(workers => [...workers, { key: Math.random().toString, value: response.data }])
                 console.log('WORKERS', workers)
             })
             .catch(error => {
@@ -83,15 +83,15 @@ const HomeScreen = () => {
         { key: 9, img: require('../../assets/Home/avatar.png'), name: 'محمد', field: 'مبرمج', location: 'عمّان' },
     ]
 
-    // 
-    let renderItem = ({ item, index }) => {
-        if (item.empty === true) {
-            // return <View style={[styles.item, styles.itemInvisible]} />;
-        }
-        return (
-            <WorkerListItem key={index} img={item.img} name={item.name} field={item.field} location={item.location} />
-        );
-    };
+
+    /*    let renderItem = ({ item, index }) => {
+           if (item.empty === true) {
+               // return <View style={[styles.item, styles.itemInvisible]} />;
+           }
+           return (
+               <WorkerListItem img={item.img} name={item.name} field={item.field} location={item.location} />
+           );
+       }; */
 
     return (
         <View>
@@ -106,11 +106,12 @@ const HomeScreen = () => {
             </View>
 
             {/* <ScrollView style={styles.container}> */}
-                <FlatList
-                    data={items}
-                    renderItem={renderItem}
-                    numColumns={2}
-                />
+            <FlatList
+            /* keyExtractor = {(item, index) => item.id}  Get Unique Key For every Item In flat List*/
+                data={items}
+                renderItem={result => (<WorkerListItem img={result.item.img} name={result.item.name} field={result.item.field} location={result.item.location} />)}
+                numColumns={2}
+            />
             {/* </ScrollView> */}
         </View >
     );
