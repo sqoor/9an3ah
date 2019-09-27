@@ -27,50 +27,46 @@ export default class ContactScreen extends Component {
     return (
       <View >
         <View >
+
           <Modal
             animationType="slide"
             transparent={false}
-            visible={this.state.modalVisible}
-          >
+            visible={this.state.modalVisible}>
+            {/* Header */}
             <View style={styles.container}>
               <Image
                 source={AVATART}
-                style={{ width: 100, height: 100,resizeMode:'contain' }} />
-
-
+                style={{ width: 100, height: 100, resizeMode: 'contain' }} />
               <Text style={styles.personalinfo}>{this.state.fullName}</Text>
               <Text style={styles.personalinfo}>{this.state.phoneNumber}</Text>
             </View>
-
+            {/* Information */}
             <View style={styles.info}>
               <View style={styles.row1}>
-                <View style={styles.innerInfo}><Text style={styles.row1}> <Image  source={Location}
-              style={{ width: 30, height: 30,resizeMode:'contain' }}
-              />{this.state.location}</Text></View>
-                <View style={styles.innerInfo}><Text style={styles.row1}> <Image  source={FieldOfWork}
-              style={{ width: 30, height: 30,resizeMode:'contain' }}
-              />{this.state.field}</Text></View>
+                <View style={styles.innerInfo}><Text style={styles.row1}> <Image source={Location}
+                  style={{ width: 30, height: 30, resizeMode: 'contain' }}
+                />{this.state.location}</Text></View>
+                <View style={styles.innerInfo}><Text style={styles.row1}> <Image source={FieldOfWork}
+                  style={{ width: 30, height: 30, resizeMode: 'contain' }}
+                />{this.state.field}</Text></View>
               </View>
               <View style={styles.row1}>
-                <View style={styles.innerInfo}><Text style={styles.row1}><Image  source={money}
-              style={{ width: 30, height: 30,resizeMode:'contain' }}
-              />{this.state.hourlyFare + `دينار بالساعة`}</Text></View>
-                <View style={styles.innerInfo}><Text style={styles.row1}><Image  source={behavior}
-              style={{ width: 30, height: 30,resizeMode:'contain' }}
-              />{this.state.experience + `سنين خبرة`}</Text></View>
+                <View style={styles.innerInfo}><Text style={styles.row1}><Image source={money}
+                  style={{ width: 30, height: 30, resizeMode: 'contain' }}
+                />{this.state.hourlyFare + `دينار بالساعة`}</Text></View>
+                <View style={styles.innerInfo}><Text style={styles.row1}><Image source={behavior}
+                  style={{ width: 30, height: 30, resizeMode: 'contain' }}
+                />{this.state.experience + `سنين خبرة`}</Text></View>
               </View>
             </View>
 
-            {/* Bottons Container */}
             <View style={styles.btns}>
-              {/* Call Botton */}
               <TouchableOpacity
                 onPress={this.calling}
                 style={styles.callBtn}
               >
                 <Text style={styles.btnText}>إتصال</Text>
               </TouchableOpacity>
-              {/* Cancle Botton */}
               <TouchableOpacity
                 onPress={() => {
                   this.Modal(false);
@@ -104,11 +100,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     flexDirection: 'row',
     alignItems: 'center',
-    borderColor:'#FFF',
+    borderColor: '#FFF',
     borderWidth: 2,
-    // backgroundColor: '#000',
   },
-  //Bottons Container
   btns: {
     marginTop: 15,
     flexDirection: 'row',
@@ -116,7 +110,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: '100%'
   },
-  //Cancle Botton
   cancleBtn: {
     paddingVertical: 15,
     margin: 10,
@@ -127,7 +120,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#FD8469",
     borderRadius: 10,
   },
-  //Call Botton
   callBtn: {
     paddingVertical: 15,
     margin: 10,
@@ -138,7 +130,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFE346",
     borderRadius: 10,
   },
-  // Botton Titles
   btnText: {
     fontSize: 22
   },
@@ -154,7 +145,7 @@ const styles = StyleSheet.create({
 
   info: {
     justifyContent: 'center',
-    alignItems:'center',
+    alignItems: 'center',
     width: 320,
     height: 190,
     marginLeft: 25,
@@ -169,7 +160,7 @@ const styles = StyleSheet.create({
     elevation: 6,
   },
   row1: {
-    width:'100%',
+    width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-around',
     fontSize: 18,
