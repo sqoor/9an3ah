@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TextInput, View, ScrollView, TouchableOpacity } from 'react-native'
+import {Text, TextInput, View, ScrollView, TouchableOpacity } from 'react-native'
 import { Dropdown } from 'react-native-material-dropdown';
 
 

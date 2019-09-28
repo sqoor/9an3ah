@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
-  <g id="Field_Of_Work" data-name="Field Of Work" transform="translate(-0.456 -0.456)">
-    <rect id="Rectangle_14" data-name="Rectangle 14" width="40" height="40" rx="20" transform="translate(0.456 0.456)" fill="#ffd34e"/>
-    <path id="Path_336" data-name="Path 336" d="M181.76,101.233v3.932h1.707v-3.052a.379.379,0,0,1,.379-.379h7.662a.379.379,0,0,1,.379.379v3.052h1.552v-3.932a1.163,1.163,0,0,0-1.163-1.163h-9.352a1.163,1.163,0,0,0-1.164,1.163Z" transform="translate(-167.22 -92.041)" fill="#4b525f"/>
-    <rect id="Rectangle_15" data-name="Rectangle 15" width="26.519" height="20.777" rx="10.388" transform="translate(7.197 12.106)" fill="#304269"/>
-    <path id="Path_337" data-name="Path 337" d="M104.805,157.969a5.2,5.2,0,0,0,6.419,0l9.6-7.571a1.386,1.386,0,0,0-.9-.4H96.1a1.377,1.377,0,0,0-.9.4Z" transform="translate(-87.559 -137.991)" fill="#91bed4"/>
-    <rect id="Rectangle_16" data-name="Rectangle 16" width="2.119" height="2.119" rx="1.06" transform="translate(20.557 17.65) rotate(45)" fill="#ea6045"/>
-  </g>
-</svg>
