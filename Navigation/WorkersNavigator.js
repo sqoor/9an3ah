@@ -1,14 +1,16 @@
-import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-import { createStackNavigator } from 'react-navigation'
+
+import { createAppContainer } from 'react-navigation'
+import { createStackNavigator } from 'react-navigation-stack'
 import HomeScreen from '../Components/Home/HomeScreen'
 import LoginScreen from '../Components/Login/LoginScreen'
 import SignUpScreen from '../Components/SignUp/SignUpScreen'
 import EditProfileScreen from '../Components/Profile/EditProfile'
 
-createStackNavigator({
+const WorkersNavigator = createStackNavigator({
     Home: HomeScreen,
     Login: LoginScreen,
     SignUp: SignUpScreen,
     EditProfile: EditProfileScreen
 })
+
+export default createAppContainer(WorkersNavigator);
