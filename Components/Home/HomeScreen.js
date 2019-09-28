@@ -6,7 +6,7 @@ import WorkerListItem from './WorkerListItem';
 import axios from 'axios'
 
 
-const HomeScreen = () => {
+const HomeScreen = (props) => {
 
     // Hook State To Contain Array Of Workers.
     const [workers, setWorkers] = useState('');
@@ -30,11 +30,6 @@ const HomeScreen = () => {
     //METHOD GET
     //Fetch Workers In A Specific Category
     function filterByCategory() {
-
-    }
-
-    //Navigate To ProfileScreen
-    function moveToProfileScreen() {
 
     }
 
@@ -110,7 +105,7 @@ const HomeScreen = () => {
                 <View style={styles.searchSection}>
                     <TouchableOpacity
                         style={{ justifyContent: 'center', alignItems: 'center', width: 70, height: 70 }}
-                        onPress={() => moveToProfileScreen()}>
+                        onPress={() => props.navigation.navigate({routeName: 'Profile'})}>
                         <Image style={styles.profileIcon} source={require('../../assets/Home/man.png')} />
                     </TouchableOpacity>
                     <TextInput
