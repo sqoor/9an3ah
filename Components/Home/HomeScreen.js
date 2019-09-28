@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, TextInput, ScrollView, Image, FlatList } from 'react-native'
+import { View, StyleSheet, TextInput, TouchableOpacity, Image, FlatList } from 'react-native'
 import { Dropdown } from 'react-native-material-dropdown';
 import CategoriesList from './CategoriesList';
 import WorkerListItem from './WorkerListItem';
@@ -9,7 +9,7 @@ import axios from 'axios'
 const HomeScreen = () => {
 
     // Hook State To Contain Array Of Workers.
-    const [workers, setWorkers] = useState([]);
+    const [workers, setWorkers] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
 
     // @METHOD GET
@@ -19,12 +19,23 @@ const HomeScreen = () => {
             .then(response => {
                 console.log('RESPONSE', response)
                 console.log('DATA', response.data)
-                setWorkers(workers => [...workers, { key: Math.random().toString, value: response.data }])
-                console.log('WORKERS', workers)
+                setWorkers(workers => [...workers, response.data])
+                console.log('WORKERS AXIOS', workers)
             })
             .catch(error => {
                 alert(error);
             })
+    }
+
+    //METHOD GET
+    //Fetch Workers In A Specific Category
+    function filterByCategory() {
+
+    }
+
+    //Navigate To ProfileScreen
+    function moveToProfileScreen() {
+
     }
 
     // Execute "fetchData" Method Once The Component Open.
@@ -89,13 +100,19 @@ const HomeScreen = () => {
         setSearchTerm(enteredTerm);
     };
 
+    console.log('WORKERS', workers)
+
     return (
         <View>
             {/* App Bar */}
             <View style={styles.bar}>
                 {/* Search & Profile Avatar*/}
                 <View style={styles.searchSection}>
-                    <Image style={styles.profileIcon} source={require('../../assets/Home/man.png')} />
+                    <TouchableOpacity
+                        style={{ justifyContent: 'center', alignItems: 'center', width: 70, height: 70 }}
+                        onPress={() => moveToProfileScreen()}>
+                        <Image style={styles.profileIcon} source={require('../../assets/Home/man.png')} />
+                    </TouchableOpacity>
                     <TextInput
                         style={styles.input}
                         placeholder='ابحث عن فنّي ...'
@@ -108,7 +125,7 @@ const HomeScreen = () => {
                 {/* "JORDAN" Cities List */}
                 <Dropdown label='اختار المحافظة ...' data={cities} />
                 {/* Workers Fields Categories Component */}
-                <CategoriesList />
+                <CategoriesList onFilter={filterByCategory} />
             </View>
 
             {/* Workers List */}
@@ -120,6 +137,7 @@ const HomeScreen = () => {
             />
         </View >
     );
+
 }
 
 const styles = StyleSheet.create({
