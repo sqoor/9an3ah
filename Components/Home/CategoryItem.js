@@ -1,26 +1,28 @@
-import { View, Image, Text, StyleSheet } from 'react-native';
+import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import React from 'react';
 
 const CategoryItem = (props) => {
 
     return (
-        <View style={styles.categoryItem}>
-            <Image style={styles.img} source={props.img } />
-            <Text style={styles.title}>{props.title}</Text>
-        </View>
+        <TouchableOpacity style={styles.categoryItem} onPress={() => {props.onFilter}}>
+            <View style={styles.categoryItem}>
+                <Image style={styles.img} source={props.img} />
+                <Text style={styles.title}>{props.title}</Text>
+            </View>
+        </TouchableOpacity>
     );
 }
 
 const styles = StyleSheet.create({
     categoryItem: {
-        margin:8,
+        margin: 8,
         justifyContent: "center",
         alignItems: "center",
         resizeMode: "contain",
 
     },
     img: {
-        flex:1,
+        flex: 1,
         borderColor: '#000',
         borderWidth: 1,
         borderRadius: 500,
@@ -30,7 +32,7 @@ const styles = StyleSheet.create({
 
     },
     title: {
-        flex:1,
+        flex: 1,
         color: '#000',
     }
 })
