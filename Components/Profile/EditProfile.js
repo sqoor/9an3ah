@@ -6,40 +6,42 @@ import { Dropdown } from 'react-native-material-dropdown';
 export default class EditProfile extends Component {
   render() {
     let data = [{
-      value: 'عمّان',
+      value: 'عمّان'
     }, {
-      value: 'اربد',
+      value: 'اربد'
     }, {
-      value: 'السلط',
+      value: 'السلط'
     }, {
-      value: 'العقبة',
+      value: 'العقبة'
     }, {
-      value: 'مفرق',
+      value: 'مفرق'
     }, {
-      value: 'الزرقاء',
+      value: 'الزرقاء'
     }, {
-      value: 'الطفيلة',
+      value: 'الطفيلة'
     }, {
-      value: 'الكرك',
+      value: 'الكرك'
     }, {
-      value: 'جرش',
+      value: 'جرش'
     }, {
-      value: 'مادبا',
+      value: 'مادبا'
     }, {
-      value: 'عجلون',
+      value: 'عجلون'
     }];
+
+
     let data2 = [{
-      value: 'نجّار',
+      value: 'نجّار'
     },
-    { value: 'حدّاد', },
-    { value: 'بلّيط', },
-    { value: 'دهّين', },
-    { value: 'بنّاء', },
-    { value: 'ونش', },
-    { value: 'قصّير', },
-    { value: 'مواسرجي', },
-    { value: 'كهربجي', },
-    { value: 'ميكانيكي', }]
+    { value: 'حدّاد' },
+    { value: 'بلّيط' },
+    { value: 'دهّين' },
+    { value: 'بنّاء' },
+    { value: 'ونش' },
+    { value: 'قصّير' },
+    { value: 'مواسرجي' },
+    { value: 'كهربجي' },
+    { value: 'ميكانيكي' }]
 
 
 
