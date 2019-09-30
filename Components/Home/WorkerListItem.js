@@ -1,19 +1,19 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
-
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 
 const WorkerListItem = (props) => {
     const img = require("../../assets/Home/avatar.png")
-
     return (
-        <View style={styles.item}>
-            <Image style={styles.img} source={img} />
-            <View style={styles.txtContainer}>
-                <Text style={styles.text, styles.nameTxt}>{props.name}</Text>
-                <Text style={styles.text}>{props.field}</Text>
-                <Text style={styles.text}>{props.location}</Text>
+        <TouchableOpacity style={styles.item}>
+            <View >
+                <Image style={styles.img} source={img} />
+                <View style={styles.txtContainer}>
+                    <Text style={styles.text, styles.nameTxt}>{props.name}</Text>
+                    <Text style={styles.text}>{props.field}</Text>
+                    <Text style={styles.text}>{props.location}</Text>
+                </View>
             </View>
-        </View>
+        </TouchableOpacity>
     );
 }
 const styles = StyleSheet.create({
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         margin: 8,
         elevation: 4,
-        shadowOffset:{width: 2, height: 2},
+        shadowOffset: { width: 2, height: 2 },
         shadowColor: '#000',
         shadowRadius: 2,
         shadowOpacity: 0.8,
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
 
     },
     text: {
-        flex:1,
+        flex: 1,
     },
     nameTxt: {
         fontSize: 24,
@@ -43,14 +43,14 @@ const styles = StyleSheet.create({
     },
     infoTxt: {
         fontSize: 18,
-        color:'#A7A7A7',
+        color: '#A7A7A7',
     },
     txtContainer: {
         width: '70%',
         alignSelf: "flex-end",
         marginEnd: 10,
         marginStart: 10,
-        paddingBottom:10
+        paddingBottom: 10
     }
 })
 
