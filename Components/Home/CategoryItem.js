@@ -5,7 +5,7 @@ const CategoryItem = (props) => {
 
     return (
         <TouchableOpacity style={styles.categoryItem} onPress={() => {props.onFilter}}>
-            <View style={styles.categoryItem}>
+            <View>
                 <Image style={styles.img} source={props.img} />
                 <Text style={styles.title}>{props.title}</Text>
             </View>
@@ -29,11 +29,12 @@ const styles = StyleSheet.create({
         width: 50,
         height: 50,
         backgroundColor: '#FFF'
-
     },
     title: {
         flex: 1,
         color: '#000',
+        textAlign: 'center',
+        marginTop: 4
     }
 })
 
