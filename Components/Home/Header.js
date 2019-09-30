@@ -2,26 +2,14 @@ import React, { Component } from 'react';
 import { Image, StyleSheet, View, TextInput, Animated, TouchableOpacity } from 'react-native';
 import { Dropdown } from 'react-native-material-dropdown';
 import CategoriesList from './CategoriesList';
-import axios from 'axios';
 
 export default class Header extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            searchTerm: ''
         }
-    }
-
-    // Get User Search Term. 
-    searchHandler = (event) => {
-
-    };
-
-
-    //METHOD GET
-    //Fetch Workers In A Specific Category
-    filterByCategory = () => {
-
     }
 
     render() {
@@ -65,29 +53,28 @@ export default class Header extends Component {
                 value: 'السلط',
             }
         ];
-
         return (
             <View style={styles.header}>
                 {/* Search & Profile Avatar*/}
                 <View style={styles.searchSection}>
                     <TouchableOpacity
                         style={{ justifyContent: 'center', alignItems: 'center', width: 70, height: 70 }}
-                        onPress={() => props.navigation.navigate({ routeName: 'Profile' })}>
+                        onPress={() => this.props.navigation.navigate('Profile')}>
                         <Image style={styles.profileIcon} source={require('../../assets/Home/man.png')} />
                     </TouchableOpacity>
                     <TextInput
                         style={styles.input}
                         placeholder='ابحث عن فنّي ...'
                         placeholderTextColor='#A7A7A7'
-                        onChangeText={searchHandler}
-                        value={searchTerm}>
+                        onChangeText={() => this.state.searchTerm}
+                        value={this.state.searchTerm}>
 
                     </TextInput>
                 </View>
                 {/* "JORDAN" Cities List */}
-                <Dropdown label='اختار المحافظة ...' data={cities} />
+                <Dropdown style={styles.cities} label='اختار المحافظة ...' data={cities} />
                 {/* Workers Fields Categories Component */}
-                <CategoriesList style={styles.categoriesList} onFilter={filterByCategory} />
+                <CategoriesList style={styles.categoriesList} />
             </View>
         )
     }
@@ -96,9 +83,9 @@ export default class Header extends Component {
 const styles = StyleSheet.create({
     header: {
         width: '100%',
-        height: '28%',
+        height: '35%',
         position: 'absolute',
-        top: 0,
+        top: 10,
         left: 0,
         backgroundColor: '#FFE346',
         flex: 1
@@ -128,8 +115,9 @@ const styles = StyleSheet.create({
         height: 40,
         resizeMode: "contain"
     },
+
     categoriesList: {
-        flex: 2,
+        flex: 1,
     }
 })
 
