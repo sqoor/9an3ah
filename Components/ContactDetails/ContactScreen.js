@@ -22,8 +22,6 @@ const ContactScreen = props => {
     Linking.openURL(phoneNumber)
   }
 
-
-
   return (
     <View >
 
