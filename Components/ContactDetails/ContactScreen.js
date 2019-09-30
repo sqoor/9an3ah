@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, Modal, TouchableOpacity, Image, Linking } from 'react-native'
+import { StyleSheet, View, Text, TouchableOpacity, Image, Linking } from 'react-native'
 import avatar from '../../assets/ContactModal/avatar.png';
 import FieldOfWork from '../../assets/ContactModal/FieldOfWork.png';
 import Location from '../../assets/ContactModal/Location.png';
