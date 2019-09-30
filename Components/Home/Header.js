@@ -9,17 +9,12 @@ export default class Header extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            search: {
-                searchTerm: '',
-                location: ''
-            },
-            searchResult: []
         }
     }
 
     // Get User Search Term. 
     searchHandler = (event) => {
-        
+
     };
 
 
