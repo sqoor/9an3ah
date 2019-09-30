@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, StyleSheet, View, TextInput, Animated, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, View, TextInput, Animated, TouchableOpacity, Picker } from 'react-native';
 import { Dropdown } from 'react-native-material-dropdown';
 import CategoriesList from './CategoriesList';
 
@@ -8,7 +8,8 @@ export default class Header extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            searchTerm: ''
+            searchTerm: '',
+            field: ''
         }
     }
 
@@ -72,7 +73,27 @@ export default class Header extends Component {
                     </TextInput>
                 </View>
                 {/* "JORDAN" Cities List */}
-                <Dropdown style={styles.cities} label='اختار المحافظة ...' data={cities} />
+                <View style={styles.inputGroup}>
+                    <Picker
+                        selectedValue={this.state.field}
+                        style={styles.cities}
+                        onValueChange={text => this.setState({ field: text })}
+                    >
+                        <Picker.Item label="اختار المحافظة ..." value="" />
+                        <Picker.Item label="اربد" value="اربد" />
+                        <Picker.Item label="عمّان" value="عمّان" />
+                        <Picker.Item label="عجلون" value="عجلون" />
+                        <Picker.Item label="جرش" value="جرش" />
+                        <Picker.Item label="الطفيلة" value="الطفيلة" />
+                        <Picker.Item label="السلط" value="السلط" />
+                        <Picker.Item label="الكرك" value="الكرك" />
+                        <Picker.Item label="العقبة" value="العقبة" />
+                        <Picker.Item label="معان" value="معان" />
+                        <Picker.Item label="الزرقاء" value="الزرقاء" />
+                        <Picker.Item label="مادبا" value="مادبا" />
+                        <Picker.Item label="المفرق" value="المفرق" />
+                    </Picker>
+                </View>
                 {/* Workers Fields Categories Component */}
                 <CategoriesList style={styles.categoriesList} />
             </View>
@@ -119,6 +140,15 @@ const styles = StyleSheet.create({
 
     categoriesList: {
         flex: 1,
+    },
+    list : {
+        flex: 1,
+        backgroundColor: '#FFF',
+        color: '#000',
+        borderRadius: 25,
+        width: '40%',
+        alignSelf: 'center',
+
     }
 })
 
