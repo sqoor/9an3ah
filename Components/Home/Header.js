@@ -83,9 +83,10 @@ export default class Header extends Component {
 const styles = StyleSheet.create({
     header: {
         width: '100%',
-        height: '35%',
+        height: 250,
         position: 'absolute',
-        top: 10,
+        paddingTop: 15,
+        top: 0,
         left: 0,
         backgroundColor: '#FFE346',
         flex: 1
