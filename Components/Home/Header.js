@@ -19,16 +19,7 @@ export default class Header extends Component {
 
     // Get User Search Term. 
     searchHandler = (event) => {
-        this.setState({this.state.search.searchTerm: event.target.value });
-
-        // Get workers List Depend On User Search. 
-        axios.get('https://san3ah.herokuapp.com/specific-workers/', this.state.searchTerm)
-            .then(response => {
-                this.setState({ searchResult: response.data })
-            })
-            .catch(error => {
-                alert(error);
-            })
+        
     };
 
 
