@@ -3,9 +3,11 @@ import { View, Text, StyleSheet, Image } from 'react-native';
 
 
 const WorkerListItem = (props) => {
+    const img = require("../../assets/Home/avatar.png")
+
     return (
         <View style={styles.item}>
-            <Image style={styles.img} source={props.img} />
+            <Image style={styles.img} source={img} />
             <View style={styles.txtContainer}>
                 <Text style={styles.text, styles.nameTxt}>{props.name}</Text>
                 <Text style={styles.text}>{props.field}</Text>
