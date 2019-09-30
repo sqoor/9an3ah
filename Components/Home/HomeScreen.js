@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, TextInput, TouchableOpacity, Image, FlatList } from 'react-native'
-import { Dropdown } from 'react-native-material-dropdown';
-import CategoriesList from './CategoriesList';
 import WorkerListItem from './WorkerListItem';
-import axios from 'axios'
+import axios from 'axios';
+import Header from './Header';
 
 
 const HomeScreen = (props) => {
 
     // Hook State To Contain Array Of Workers.
     const [workers, setWorkers] = useState('');
-    const [searchTerm, setSearchTerm] = useState('');
 
     // @METHOD GET
     // Fetch Workers Data From Database.
@@ -27,55 +25,8 @@ const HomeScreen = (props) => {
             })
     }
 
-    //METHOD GET
-    //Fetch Workers In A Specific Category
-    function filterByCategory() {
-
-    }
-
     // Execute "fetchData" Method Once The Component Open.
     useEffect(() => fetchData(), [])
-
-    // Array Of "JORDAN" Cities.
-    let cities = [
-        {
-            value: 'اربد',
-        },
-        {
-            value: 'عمّان',
-        },
-        {
-            value: 'جرش',
-        },
-        {
-            value: 'عجلون',
-        },
-        {
-            value: 'المفرق',
-        },
-        {
-            value: 'مأدبا',
-        },
-        {
-            value: 'معان',
-        },
-        {
-            value: 'الطفيلة',
-        },
-        {
-            value: 'العقبة',
-        },
-        {
-            value: 'الكرك',
-        },
-        {
-            value: 'الزرقاء',
-        }
-        ,
-        {
-            value: 'السلط',
-        }
-    ];
 
     // Static Data To Test The List Of Workers.
     let items = [
@@ -90,38 +41,11 @@ const HomeScreen = (props) => {
         { key: 9, img: require('../../assets/Home/avatar.png'), name: 'محمد', field: 'مبرمج', location: 'عمّان' },
     ]
 
-    // Get User Search Term. 
-    const searchHandler = (enteredTerm) => {
-        setSearchTerm(enteredTerm);
-    };
 
     console.log('WORKERS', workers)
 
     return (
-        <View>
-            {/* App Bar */}
-            <View style={styles.bar}>
-                {/* Search & Profile Avatar*/}
-                <View style={styles.searchSection}>
-                    <TouchableOpacity
-                        style={{ justifyContent: 'center', alignItems: 'center', width: 70, height: 70 }}
-                        onPress={() => props.navigation.navigate({routeName: 'Profile'})}>
-                        <Image style={styles.profileIcon} source={require('../../assets/Home/man.png')} />
-                    </TouchableOpacity>
-                    <TextInput
-                        style={styles.input}
-                        placeholder='ابحث عن فنّي ...'
-                        placeholderTextColor='#A7A7A7'
-                        onChangeText={searchHandler}
-                        value={searchTerm}>
-
-                    </TextInput>
-                </View>
-                {/* "JORDAN" Cities List */}
-                <Dropdown label='اختار المحافظة ...' data={cities} />
-                {/* Workers Fields Categories Component */}
-                <CategoriesList onFilter={filterByCategory} />
-            </View>
+        <View style={styles.list}>
 
             {/* Workers List */}
             <FlatList
@@ -133,6 +57,11 @@ const HomeScreen = (props) => {
         </View >
     );
 
+}
+
+HomeScreen.navigationOptions = {
+    header:
+        <Header />,
 }
 
 const styles = StyleSheet.create({
@@ -166,11 +95,10 @@ const styles = StyleSheet.create({
         height: 40,
         resizeMode: "contain"
     },
-    image: {
-        width: '100%',
-        height: '100%',
-        borderRadius: 10,
-    },
+    list : {
+        marginTop: 210,
+
+    }
 })
 
 export default HomeScreen;
