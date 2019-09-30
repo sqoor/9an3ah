@@ -10,13 +10,13 @@ import ContactScreen from '../Components/ContactDetails/ContactScreen';
 import Header from '../Components/Home/Header';
 
 const WorkersNavigator = createStackNavigator({
-    Home: { screen: HomeScreen },
-    Login: { screen: LoginScreen },
-    SignUp: { screen: SignUpScreen },
-    Profile: { screen: ProfileScreen },
-    EditProfile: { screen: EditProfileScreen },
-    Details: { screen: ContactScreen },
-    Header : {screen : Header}
+    Home: HomeScreen,
+    Login: LoginScreen,
+    SignUp: SignUpScreen,
+    Profile: ProfileScreen,
+    EditProfile: EditProfileScreen,
+    Details: ContactScreen,
+    Header: Header
 })
 
 export default createAppContainer(WorkersNavigator);
