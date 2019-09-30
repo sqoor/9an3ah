@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
         resizeMode: "contain"
     },
     list: {
-        marginTop: 210,
+        marginTop: 255,
     }
 })
 
