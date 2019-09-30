@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, Modal, TouchableOpacity, Image, Linking } from 'react-native'
 import avatar from '../../assets/ContactModal/avatar.png';
 import FieldOfWork from '../../assets/ContactModal/FieldOfWork.png';
@@ -6,90 +6,97 @@ import Location from '../../assets/ContactModal/Location.png';
 import behavior from '../../assets/ContactModal/behavior.png';
 import money from '../../assets/ContactModal/money.png';
 
-export default class ContactScreen extends Component {
-  state = {
-    fullName: "مصطفى",
-    phoneNumber: "0778854547",
-    location: 'عمان ',
-    experience: '7',
-    field: 'نجار',
-    hourlyFare: '20',
-    modalVisible: false,
-  }
-  Modal(visible) {
-    visible = this.props.isModalVisible;
-    this.setState({ modalVisible: visible });
-  }
+const ContactScreen = props => {
+
+  //Hook State.
+  const [fullName, setFullName] = useState("مصطفى");
+  const [phoneNumber, setPhoneNumber] = useState("0777753111");
+  const [location, setLocation] = useState("عمّان");
+  const [experience, setExperience] = useState(7);
+  const [field, setField] = useState("نجّار");
+  const [hourlyFare, setHourlyFare] = useState(20);
+
+
   calling = () => {
-    let phoneNumber = `tel:${this.state.phoneNumber}`;
+    let phoneNumber = `tel:${phoneNumber}`;
     Linking.openURL(phoneNumber)
   }
 
-  showModal = () => {
-    this.Modal(true);
 
-  }
-  render() {
-    return (
-      <View >
-        <View >
 
-          <Modal
-            animationType="slide"
-            transparent={false}
-            visible={this.state.modalVisible}>
-            {/* Header */}
-            <View style={styles.container}>
-              <Image
-                source={avatar}
-                style={{ width: 100, height: 100, resizeMode: 'contain' }} />
-              <Text style={styles.personalInfo}>{this.state.fullName}</Text>
-              <Text style={styles.personalInfo}>{this.state.phoneNumber}</Text>
-            </View>
-            {/* Information */}
-            <View style={styles.info}>
-              <View style={styles.row1}>
-                <View style={styles.innerInfo}><Text style={styles.row1}> <Image source={Location}
-                  style={{ width: 30, height: 30, resizeMode: 'contain' }}
-                />{this.state.location}</Text></View>
-                <View style={styles.innerInfo}><Text style={styles.row1}> <Image source={FieldOfWork}
-                  style={{ width: 30, height: 30, resizeMode: 'contain' }}
-                />{this.state.field}</Text></View>
-              </View>
-              <View style={styles.row1}>
-                <View style={styles.innerInfo}><Text style={styles.row1}><Image source={money}
-                  style={{ width: 30, height: 30, resizeMode: 'contain' }}
-                />{this.state.hourlyFare + `دينار بالساعة`}</Text></View>
-                <View style={styles.innerInfo}><Text style={styles.row1}><Image source={behavior}
-                  style={{ width: 30, height: 30, resizeMode: 'contain' }}
-                />{this.state.experience + `سنين خبرة`}</Text></View>
-              </View>
-            </View>
+  return (
+    <View >
 
-            <View style={styles.btns}>
-              <TouchableOpacity
-                onPress={this.calling}
-                style={styles.callBtn}
-              >
-                <Text style={styles.btnText}>إتصال</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  this.Modal(false);
-                }}
-                style={styles.cancelBtn}
-              >
-                <Text style={styles.btnText}>إلغاء</Text>
-              </TouchableOpacity>
-            </View>
+      {/* Header */}
+      <View style={styles.container}>
+        <Image
+          source={avatar}
+          style={{ width: 100, height: 100, resizeMode: 'contain' }} />
+        <Text style={styles.personalInfo}>{fullName}</Text>
+        <Text style={styles.personalInfo}>{phoneNumber}</Text>
+      </View> {/* End Header */}
 
-          </Modal>
+      {/* Information */}
+      <View style={styles.info}>
+        {/* First Row */}
+        <View style={styles.row1}>
+          {/* Location */}
+          <View style={styles.innerInfo}>
+            <Text style={styles.row1}>
+              <Image source={Location}
+                style={{ width: 30, height: 30, resizeMode: 'contain' }}
+              />{location}</Text>
+          </View>
+          {/* Field Of Work */}
+          <View style={styles.innerInfo}>
+            <Text style={styles.row1}>
+              <Image source={FieldOfWork}
+                style={{ width: 30, height: 30, resizeMode: 'contain' }}
+              />{field}
+            </Text>
+          </View>
+        </View> {/* End First Row */}
 
-        </View>
+        {/* Second Row */}
+        <View style={styles.row1}>
+          {/* Fare */}
+          <View style={styles.innerInfo}>
+            <Text style={styles.row1}>
+              <Image source={money}
+                style={{ width: 30, height: 30, resizeMode: 'contain' }}
+              />{hourlyFare + `دينار بالساعة`}
+            </Text>
+          </View>
+          {/* Experience */}
+          <View style={styles.innerInfo}>
+            <Text style={styles.row1}>
+              <Image source={behavior}
+                style={{ width: 30, height: 30, resizeMode: 'contain' }}
+              />{experience + `سنين خبرة`}
+            </Text>
+          </View>
+        </View> {/* End Second Row */}
+      </View> {/* End Information */}
+
+      {/* Buttons */}
+      <View style={styles.btns}>
+        {/* Call Button */}
+        <TouchableOpacity
+          onPress={calling}
+          style={styles.callBtn}
+        >
+          <Text style={styles.btnText}>إتصال</Text>
+        </TouchableOpacity>
+        {/* Cancel Button */}
+        <TouchableOpacity
+          style={styles.cancelBtn}
+        >
+          <Text style={styles.btnText}>إلغاء</Text>
+        </TouchableOpacity>
       </View>
+    </View>
 
-    );
-  }
+  );
 }
 
 
@@ -172,6 +179,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
 });
+
+export default ContactScreen;
+
 
 
 
