@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Image, StyleSheet, View, TextInput, Animated, TouchableOpacity, Picker } from 'react-native';
-import { Dropdown } from 'react-native-material-dropdown';
 import CategoriesList from './CategoriesList';
 
 export default class Header extends Component {
@@ -14,46 +13,6 @@ export default class Header extends Component {
     }
 
     render() {
-        // Array Of "JORDAN" Cities.
-        let cities = [
-            {
-                value: 'اربد',
-            },
-            {
-                value: 'عمّان',
-            },
-            {
-                value: 'جرش',
-            },
-            {
-                value: 'عجلون',
-            },
-            {
-                value: 'المفرق',
-            },
-            {
-                value: 'مأدبا',
-            },
-            {
-                value: 'معان',
-            },
-            {
-                value: 'الطفيلة',
-            },
-            {
-                value: 'العقبة',
-            },
-            {
-                value: 'الكرك',
-            },
-            {
-                value: 'الزرقاء',
-            }
-            ,
-            {
-                value: 'السلط',
-            }
-        ];
         return (
             <View style={styles.header}>
                 {/* Search & Profile Avatar*/}
@@ -67,19 +26,17 @@ export default class Header extends Component {
                         style={styles.input}
                         placeholder='ابحث عن فنّي ...'
                         placeholderTextColor='#A7A7A7'
-                        onChangeText={() => this.state.searchTerm}
+                        onChangeText={text => this.setState({searchTerm: text}) }
                         value={this.state.searchTerm}>
 
                     </TextInput>
                 </View>
                 {/* "JORDAN" Cities List */}
-                <View style={styles.inputGroup}>
+                <View style={styles.citiesList}>
                     <Picker
                         selectedValue={this.state.field}
-                        style={styles.cities}
-                        onValueChange={text => this.setState({ field: text })}
-                    >
-                        <Picker.Item label="اختار المحافظة ..." value="" />
+                        onValueChange={text => this.setState({ field: text })}>
+                        <Picker.Item disabled={true} label="اختار المحافظة ..." value="" />
                         <Picker.Item label="اربد" value="اربد" />
                         <Picker.Item label="عمّان" value="عمّان" />
                         <Picker.Item label="عجلون" value="عجلون" />
@@ -106,7 +63,7 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 250,
         position: 'absolute',
-        paddingTop: 15,
+        paddingTop: 0,
         top: 0,
         left: 0,
         backgroundColor: '#FFE346',
@@ -141,14 +98,15 @@ const styles = StyleSheet.create({
     categoriesList: {
         flex: 1,
     },
-    list : {
+    citiesList: {
         flex: 1,
         backgroundColor: '#FFF',
         color: '#000',
         borderRadius: 25,
-        width: '40%',
+        width: '50%',
         alignSelf: 'center',
-
+        textAlign: 'center',
+        marginTop:4
     }
 })
 
