@@ -2,17 +2,14 @@ import React, { useState, useEffect } from "react";
 import {
     View,
     StyleSheet,
-    TextInput,
-    TouchableOpacity,
-    Image,
     FlatList
 } from "react-native";
-import { Dropdown } from "react-native-material-dropdown";
-import CategoriesList from "./CategoriesList";
+import Header from './Header';
 import WorkerListItem from "./WorkerListItem";
 import axios from "axios";
 
 const HomeScreen = props => {
+  
     // Hook State To Contain Array Of Workers.
     const [workers, setWorkers] = useState("");
 
@@ -37,6 +34,7 @@ const HomeScreen = props => {
     return (
         <View style={styles.list}>
             {/* Workers List */}
+
             <FlatList
                 keyExtractor={item => item._id}
                 data={workers}
@@ -55,8 +53,7 @@ const HomeScreen = props => {
 };
 
 HomeScreen.navigationOptions = {
-    header:
-        <Header />,
+    header:<Header workers={HomeScreen.workers}/>
 }
 
 const styles = StyleSheet.create({
