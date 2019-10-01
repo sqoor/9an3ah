@@ -23,58 +23,65 @@ const ContactScreen = props => {
   }
 
   return (
-    <View >
-
+    <View style={styles.container}>
       {/* Header */}
-      <View style={styles.container}>
+      <View style={styles.header}>
         <Image
           source={avatar}
           style={{ width: 100, height: 100, resizeMode: 'contain' }} />
         <Text style={styles.personalInfo}>{fullName}</Text>
         <Text style={styles.personalInfo}>{phoneNumber}</Text>
-      </View> {/* End Header */}
+      </View>
+      {/* End Header */}
 
       {/* Information */}
       <View style={styles.info}>
-        {/* First Row */}
-        <View style={styles.row1}>
-          {/* Location */}
-          <View style={styles.innerInfo}>
-            <Text style={styles.row1}>
-              <Image source={Location}
-                style={{ width: 30, height: 30, resizeMode: 'contain' }}
-              />{location}</Text>
-          </View>
+
+        {/* First Column */}
+        <View style={styles.firstColumn}>
+
           {/* Field Of Work */}
           <View style={styles.innerInfo}>
-            <Text style={styles.row1}>
+            <Text>
               <Image source={FieldOfWork}
                 style={{ width: 30, height: 30, resizeMode: 'contain' }}
               />{field}
             </Text>
           </View>
-        </View> {/* End First Row */}
-
-        {/* Second Row */}
-        <View style={styles.row1}>
-          {/* Fare */}
-          <View style={styles.innerInfo}>
-            <Text style={styles.row1}>
-              <Image source={money}
-                style={{ width: 30, height: 30, resizeMode: 'contain' }}
-              />{hourlyFare + `دينار بالساعة`}
-            </Text>
-          </View>
           {/* Experience */}
           <View style={styles.innerInfo}>
-            <Text style={styles.row1}>
+            <Text>
               <Image source={behavior}
                 style={{ width: 30, height: 30, resizeMode: 'contain' }}
-              />{experience + `سنين خبرة`}
+              />{experience + ` سنين خبرة `}
             </Text>
           </View>
-        </View> {/* End Second Row */}
-      </View> {/* End Information */}
+
+        </View>
+        {/* End First Row */}
+
+        {/* Second Column */}
+        <View style={styles.secondColumn}>
+          {/* Location */}
+          <View style={styles.innerInfo}>
+            <Text>
+              <Image source={Location}
+                style={{ width: 30, height: 30, resizeMode: 'contain' }}
+              />{location}</Text>
+          </View>
+          {/* Fare */}
+          <View style={styles.innerInfo}>
+            <Text>
+              <Image source={money}
+                style={{ width: 30, height: 30, resizeMode: 'contain' }}
+              />{hourlyFare + ` دينار بالساعة `}
+            </Text>
+          </View>
+
+        </View>
+        {/* End Second Row */}
+      </View>
+      {/* End Information */}
 
       {/* Buttons */}
       <View style={styles.btns}>
@@ -93,20 +100,57 @@ const ContactScreen = props => {
         </TouchableOpacity>
       </View>
     </View>
-
   );
 }
 
 
 const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center'
+  },
+
+  header: {
+    display: 'flex',
+    height: 250,
+    width: '100%',
+    marginBottom: 10,
+    backgroundColor: '#FFE346',
+    alignItems: 'center',
+    justifyContent: 'center',
+
+  },
+  info: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 350,
+    height: 200,
+    backgroundColor: 'white',
+    borderColor: '#FFE346',
+    borderRadius: 10,
+    borderWidth: 1,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    elevation: 6,
+    marginTop: 10
+  },
+  firstColumn: {
+    width: '100%',
+    justifyContent: 'flex-end',
+    margin: 8,
+  },
+  secondColumn: {
+    width: '100%',
+    justifyContent: 'flex-start',
+    margin: 8,
+  },
   innerInfo: {
-    flex: 1,
     width: '100%',
     justifyContent: 'space-around',
     flexDirection: 'row',
-    alignItems: 'center',
-    borderColor: '#FFF',
-    borderWidth: 2,
+    alignItems: 'baseline',
   },
   btns: {
     marginTop: 15,
@@ -138,41 +182,7 @@ const styles = StyleSheet.create({
   btnText: {
     fontSize: 22
   },
-  container: {
-    display: 'flex',
-    height: 200,
-    marginBottom: 10,
-    backgroundColor: '#FFE346',
-    alignItems: 'center',
-    justifyContent: 'center',
 
-  },
-
-  info: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 320,
-    height: 190,
-    marginLeft: 25,
-    backgroundColor: 'white',
-    borderColor: '#FFE346',
-    borderRadius: 10,
-    borderWidth: 1,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.8,
-    shadowRadius: 2,
-    elevation: 6,
-  },
-  row1: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    fontSize: 18,
-    color: '#000',
-    margin: 8
-
-  },
   personalInfo: {
     fontSize: 18,
   },

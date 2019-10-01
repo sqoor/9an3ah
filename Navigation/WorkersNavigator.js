@@ -6,7 +6,6 @@ import SignUpScreen from "../Components/SignUp/SignUpScreen";
 import EditProfileScreen from "../Components/Profile/EditProfile";
 import ProfileScreen from "../Components/Profile/ProfileScreen";
 import ContactScreen from "../Components/ContactDetails/ContactScreen";
-import Header from "../Components/Home/Header";
 
 const WorkersNavigator = createStackNavigator({
   Home: {

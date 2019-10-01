@@ -40,6 +40,7 @@ const HomeScreen = props => {
               name={result.item.fullName}
               field={result.item.field}
               location={result.item.location}
+              {...props}
             />
           )}
         />

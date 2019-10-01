@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 const WorkerListItem = (props) => {
     const img = require("../../assets/Home/avatar.png")
     return (
-        <TouchableOpacity style={styles.item}>
+        <TouchableOpacity style={styles.item} onPress={() => props.navigation.navigate('Details')}>
             <View >
                 <Image style={styles.img} source={img} />
                 <View style={styles.txtContainer}>
