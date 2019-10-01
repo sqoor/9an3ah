@@ -21,12 +21,24 @@ const HomeScreen = props => {
       });
   }
 
+
+  const filterWorkers = (filter) => {
+    setWorkers(workers.filter(worker => {
+      return ( 
+        worker.field === filter.field &&
+        worker.location === filter.location &&
+        worker.searchTerm === filter.searchTerm
+      )
+    }))
+    console.log("FILTER: ", filter)
+  }
+
   // Execute "fetchData" Method Once The Component Open.
   useEffect(() => fetchData(), []);
 
   return (
     <View>
-      <Header {...props} />
+      <Header {...props} filterWorkers={filterWorkers} />
       <View style={styles.list}>
         {/* Workers List */}
 
