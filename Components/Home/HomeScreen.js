@@ -1,95 +1,86 @@
 import React, { useState, useEffect } from "react";
-import {
-    View,
-    StyleSheet,
-    FlatList
-} from "react-native";
-import Header from './Header';
+import { View, StyleSheet, FlatList } from "react-native";
+import Header from "./Header";
 import WorkerListItem from "./WorkerListItem";
 import axios from "axios";
 
 const HomeScreen = props => {
-  
-    // Hook State To Contain Array Of Workers.
-    const [workers, setWorkers] = useState("");
+  // Hook State To Contain Array Of Workers.
+  const [workers, setWorkers] = useState("");
 
-    // @METHOD GET
-    // Fetch Workers Data From Database.
-    function fetchData() {
-        axios
-            .get("https://san3ah.herokuapp.com/workers")
-            .then(response => {
-                setWorkers(response.data);
-            })
-            .catch(error => {
-                alert(error);
-            });
-    }
+  // @METHOD GET
+  // Fetch Workers Data From Database.
+  function fetchData() {
+    axios
+      .get("https://san3ah.herokuapp.com/workers")
+      .then(response => {
+        setWorkers(response.data);
+      })
+      .catch(error => {
+        alert(error);
+      });
+  }
 
+  // Execute "fetchData" Method Once The Component Open.
+  useEffect(() => fetchData(), []);
 
+  return (
+    <View>
+      <Header {...props} />
+      <View style={styles.list}>
+        {/* Workers List */}
 
-    // Execute "fetchData" Method Once The Component Open.
-    useEffect(() => fetchData(), []);
-
-    return (
-        <View style={styles.list}>
-            {/* Workers List */}
-
-            <FlatList
-                keyExtractor={item => item._id}
-                data={workers}
-                numColumns={2}
-                renderItem={result => (
-                    <WorkerListItem
-                        img={result.item.img} // Undefined
-                        name={result.item.fullName}
-                        field={result.item.field}
-                        location={result.item.location}
-                    />
-                )}
+        <FlatList
+          keyExtractor={item => item._id}
+          data={workers}
+          numColumns={2}
+          renderItem={result => (
+            <WorkerListItem
+              img={result.item.img} // Undefined
+              name={result.item.fullName}
+              field={result.item.field}
+              location={result.item.location}
             />
-        </View>
-    );
+          )}
+        />
+      </View>
+    </View>
+  );
 };
 
-HomeScreen.navigationOptions = {
-    header:<Header workers={HomeScreen.workers}/>
-}
-
 const styles = StyleSheet.create({
-
-    bar: {
-        backgroundColor: '#FFE346',
-        height: '28%',
-        width: '100%',
-    },
-    searchSection: {
-        marginTop: 38,
-        marginLeft: 10,
-        marginRight: 10,
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-    },
-    input: {
-        flex: 2.5,
-        paddingTop: 10,
-        paddingRight: 20,
-        paddingBottom: 10,
-        paddingLeft: 10,
-        backgroundColor: '#FFF',
-        color: '#424242',
-        borderRadius: 25
-    },
-    profileIcon: {
-        flex: 0.5,
-        width: 40,
-        height: 40,
-        resizeMode: "contain"
-    },
-    list: {
-        marginTop: 255,
-    }
-})
+  bar: {
+    backgroundColor: "#FFE346",
+    height: "28%",
+    width: "100%"
+  },
+  searchSection: {
+    marginTop: 38,
+    marginLeft: 10,
+    marginRight: 10,
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center"
+  },
+  input: {
+    flex: 2.5,
+    paddingTop: 10,
+    paddingRight: 20,
+    paddingBottom: 10,
+    paddingLeft: 10,
+    backgroundColor: "#FFF",
+    color: "#424242",
+    borderRadius: 25
+  },
+  profileIcon: {
+    flex: 0.5,
+    width: 40,
+    height: 40,
+    resizeMode: "contain"
+  },
+  list: {
+    marginTop: 255
+  }
+});
 
 export default HomeScreen;
