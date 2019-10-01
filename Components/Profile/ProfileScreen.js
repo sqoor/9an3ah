@@ -75,7 +75,7 @@ class ProfileScreen extends Component {
                 </View>
 
 
-                <TouchableOpacity style={styles.div3} onPress={this.props.navigation.navigate({ routeName: 'EditProfile' })}>
+                <TouchableOpacity style={styles.div3} onPress={() => this.props.navigation.navigate({ routeName: 'EditProfile' })}>
                     <Text style={{ alignSelf: "center", color: "lightgreen", fontSize: 20 }}>تعديل</Text>
                 </TouchableOpacity>
             </View>
