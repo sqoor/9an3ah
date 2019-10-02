@@ -27,6 +27,7 @@ class SignUpScreen extends React.Component {
   };
 
   submitHandler = () => {
+    console.log('submit handler worked')
     const newUser = {
       fullName: this.state.fullName.trim().toLowerCase(),
       email: this.state.email.trim().toLowerCase(),
@@ -38,17 +39,22 @@ class SignUpScreen extends React.Component {
       field: this.state.field.trim().toLowerCase()
     };
 
+    
     axios
-      // .post("https://san3ah.herokuapp.com/workers", user)
-      .post("http://192.168.43.147:9000/workers", newUser)
+      .post("https://san3ah.herokuapp.com/workers", newUser)
       .then(res => {
-        console.log(res.data);
-        
-        // if (res.data.length) alert(`Welcome ${res.data[0].fullName}`);
-        // else alert("Email and password do not match");
+        console.log('newUser', newUser);
+        console.log('res.data', res.data);
+        if (res.data) alert(`Welcome ${res.data[0].fullName}`);
+        else alert("Email and password do not match");
       })
       .catch(err => console.log("ERROR", err));
   };
+
+  goToLogin = () => {
+    this.props.navigation.navigate("Login")
+  }
+
 
   render() {
     return (
@@ -103,12 +109,16 @@ class SignUpScreen extends React.Component {
               style={{ height: 50, width: 100, color: "white" }}
               onValueChange={text => this.setState({ field: text })}
             >
-              <Picker.Item label="المهنة" value=""  />
-              <Picker.Item label="حداد" value="حداد" />
-              <Picker.Item label="موسارجي" value="موسارجي" />
-              <Picker.Item label="نجار" value="نجار" />
+              <Picker.Item label="المهنة" value="" />
               <Picker.Item label="بليط" value="بليط" />
-              <Picker.Item label="قصيير" value="قصيير" />
+              <Picker.Item label="دهين" value="دهين" />
+              <Picker.Item label="بناء" value="بناء" />
+              <Picker.Item label="ونش" value="ونش" />
+              <Picker.Item label="فصير" value="فصير" />
+              <Picker.Item label="مواسرجي" value="مواسرجي" />
+              <Picker.Item label="حداد" value="حداد" />
+              <Picker.Item label="نجار" value="نجار" />
+              <Picker.Item label="كهربجي" value="كهربجي" />
             </Picker>
           </View>
 
@@ -123,8 +133,16 @@ class SignUpScreen extends React.Component {
               <Picker.Item label="الموقع" value="" />
               <Picker.Item label="عمان" value="عمان" />
               <Picker.Item label="اربد" value="اربد" />
+              <Picker.Item label="عجلون" value="عجلون" />
+              <Picker.Item label="جرش" value="جرش" />
+              <Picker.Item label="الطفيلة" value="الطفيلة" />
+              <Picker.Item label="السلط" value="السلط" />
+              <Picker.Item label="الكرك" value="الكرك" />
+              <Picker.Item label="العقبة" value="العقبة" />
+              <Picker.Item label="معان" value="معان" />
               <Picker.Item label="الزرقاء" value="الزرقاء" />
-              <Picker.Item label="البلقاء" value="البلقاء" />
+              <Picker.Item label="مادبا" value="مادبا" />
+              <Picker.Item label="المفرق" value="المفرق" />
             </Picker>
           </View>
 
@@ -150,8 +168,14 @@ class SignUpScreen extends React.Component {
           </View>
 
           <View style={styles.inputGroup}>
-            <TouchableOpacity onPress={this.submitHander}>
+            <TouchableOpacity onPress={this.submitHandler}>
               <Text style={styles.submitBtn}>تسجيل دخول</Text>
+            </TouchableOpacity>
+          </View>
+
+          <View style={styles.inputGroup}>
+            <TouchableOpacity onPress={this.goToLogin}>
+              <Text style={{color: "white", fontWeight: "bold"}}>هل انت مستخدم؟</Text>
             </TouchableOpacity>
           </View>
         </View>

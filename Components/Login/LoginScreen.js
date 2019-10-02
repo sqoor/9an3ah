@@ -34,6 +34,12 @@ class LoginScreen extends React.Component {
       .catch(err => console.log("ERROR", err));
   };
 
+
+  goToSignUp = () => {
+    this.props.navigation.navigate("SignUp")
+  }
+
+
   render() {
     return (
       <View style={styles.container}>
@@ -64,6 +70,14 @@ class LoginScreen extends React.Component {
             <Text style={styles.submitBtn}>تسجيل دخول</Text>
           </TouchableOpacity>
         </View>
+
+        <View style={styles.inputGroup}>
+            <TouchableOpacity onPress={this.goToSignUp}>
+              <Text style={{color: "white", fontWeight: "bold"}}>مستخدم جديد؟</Text>
+            </TouchableOpacity>
+          </View>
+
+
       </View>
     );
   }
