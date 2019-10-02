@@ -5,7 +5,8 @@ import {
   StyleSheet,
   Text,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  AsyncStorage
 } from "react-native";
 
 import axios from "axios";
@@ -18,6 +19,11 @@ class LoginScreen extends React.Component {
     password: ""
   };
 
+
+  setUser() {
+    AsyncStorage.setItem('user', 'user');
+  }
+
   submitHandler = e => {
     const user = {
       email: this.state.email.trim().toLowerCase(),
@@ -25,11 +31,15 @@ class LoginScreen extends React.Component {
     };
 
     axios
-      // .post("https://san3ah.herokuapp.com/auth", user)
-      .post("http://192.168.43.147:9000/auth", user)
+    // .post("http://192.168.43.147:9000/auth", user)
+      .post("https://san3ah.herokuapp.com/auth", user)
       .then(res => {
-        if (res.data.length) alert(`Welcome ${res.data[0].fullName}`);
-        else alert("Email and password do not match");
+        if (res.data.length) {
+          this.setUser();
+          alert(`Welcome ${res.data[0].fullName}`);
+          this.props.navigation.navigate('Profile');
+        }
+          else alert("Email and password do not match");
       })
       .catch(err => console.log("ERROR", err));
   };

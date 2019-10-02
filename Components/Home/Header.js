@@ -4,7 +4,8 @@ import {
   StyleSheet,
   View,
   TouchableOpacity,
-  Picker
+  Picker,
+  AsyncStorage
 } from "react-native";
 import CategoriesList from "./CategoriesList";
 
@@ -26,6 +27,12 @@ export default class Header extends Component {
     this.props.filterWorkers(this.state)
   };
 
+
+  isUserLogged = () => {
+    
+  }
+  
+
   render() {
     return (
       <View style={styles.header}>
@@ -38,7 +45,16 @@ export default class Header extends Component {
               width: 70,
               height: 70
             }}
-            onPress={() => this.props.navigation.navigate("SignUp")}
+            onPress={() => {
+              AsyncStorage.getItem("user")
+              .then(user => {
+                console.log("user", user)
+                const gotTo = user ? "Profile" : "Login";
+                this.props.navigation.navigate(gotTo)
+              })
+              .catch(err => console.log(err));
+              }
+            }
           >
             <Image
               style={styles.profileIcon}
