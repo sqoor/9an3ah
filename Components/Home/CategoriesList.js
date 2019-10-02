@@ -8,17 +8,22 @@ const CategoriesList = props => {
       <ScrollView horizontal={true}>
         <CategoryItem
           img={require("../../assets/Home/parquet.png")}
-          title="بلّيط"
+          title=""
+          pickField={props.pickField}
+        />
+        <CategoryItem
+          img={require("../../assets/Home/parquet.png")}
+          title="بليط"
           pickField={props.pickField}
         />
         <CategoryItem
           img={require("../../assets/Home/paint-brush.png")}
-          title="دهّين"
+          title="دهين"
           pickField={props.pickField}
         />
         <CategoryItem
           img={require("../../assets/Home/crane.png")}
-          title="بنّاء"
+          title="بناء"
           pickField={props.pickField}
         />
         <CategoryItem
@@ -28,7 +33,7 @@ const CategoriesList = props => {
         />
         <CategoryItem
           img={require("../../assets/Home/cargo.png")}
-          title="قصّير"
+          title="فصير"
           pickField={props.pickField}
         />
         <CategoryItem

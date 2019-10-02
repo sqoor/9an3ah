@@ -14,7 +14,6 @@ export default class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchTerm: "",
       location: "",
       field: ""
     };
@@ -48,29 +47,18 @@ export default class Header extends Component {
               source={require("../../assets/Home/man.png")}
             />
           </TouchableOpacity>
-          <TextInput
-            style={styles.input}
-            placeholder="ابحث عن فنّي ..."
-            placeholderTextColor="#A7A7A7"
-            onChangeText={async text => {
-              await this.setState({ searchTerm: text });
-              this.filterWorkers();
-            }}
-            value={this.state.searchTerm}
-          ></TextInput>
-        </View>
         {/* "JORDAN" Cities List */}
         <View style={styles.citiesList}>
           <Picker
-            selectedValue={this.state.field}
+            selectedValue={this.state.location}
             onValueChange={async text => {
               await this.setState({ location: text });
               this.filterWorkers();
             }}
           >
-            <Picker.Item disabled={true} label="اختار المحافظة ..." value="" />
+            <Picker.Item label="اختار المحافظة ..." value="" />
+            <Picker.Item label="عمان" value="عمان" />
             <Picker.Item label="اربد" value="اربد" />
-            <Picker.Item label="عمّان" value="عمّان" />
             <Picker.Item label="عجلون" value="عجلون" />
             <Picker.Item label="جرش" value="جرش" />
             <Picker.Item label="الطفيلة" value="الطفيلة" />
@@ -82,7 +70,9 @@ export default class Header extends Component {
             <Picker.Item label="مادبا" value="مادبا" />
             <Picker.Item label="المفرق" value="المفرق" />
           </Picker>
+        </View>  
         </View>
+        
         {/* Workers Fields Categories Component */}
         <CategoriesList
           style={styles.categoriesList}
@@ -96,9 +86,9 @@ export default class Header extends Component {
 const styles = StyleSheet.create({
   header: {
     width: "100%",
-    height: 250,
+    height: 200,
     position: "absolute",
-    paddingTop: 0,
+    paddingTop: 20,
     top: 0,
     left: 0,
     backgroundColor: "#FFE346",
@@ -106,7 +96,7 @@ const styles = StyleSheet.create({
   },
   searchSection: {
     flex: 1,
-    marginTop: 38,
+    // marginTop: 38,
     marginLeft: 10,
     marginRight: 10,
     flexDirection: "row",
@@ -114,8 +104,8 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   input: {
-    flex: 2.5,
-    paddingTop: 10,
+    flex: 1,
+    // paddingTop: 10,
     paddingRight: 20,
     paddingBottom: 10,
     paddingLeft: 10,
@@ -124,7 +114,7 @@ const styles = StyleSheet.create({
     borderRadius: 25
   },
   profileIcon: {
-    flex: 0.5,
+    flex: 1,
     width: 40,
     height: 40,
     resizeMode: "contain"
