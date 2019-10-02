@@ -17,9 +17,20 @@ const ContactScreen = props => {
   const [hourlyFare, setHourlyFare] = useState(20);
 
 
+  const { navigation } = props;
+
+  useEffect(() => {
+    setFullName(navigation.getParam('fullName'));
+    setPhoneNumber(navigation.getParam('phoneNumber'));
+    setLocation(navigation.getParam('location'));
+    setExperience(navigation.getParam('experience'));
+    setField(navigation.getParam('field'));
+    setHourlyFare(navigation.getParam('hourlyFare'));
+  }, [])
+
   calling = () => {
-    let phoneNumber = `tel:${phoneNumber}`;
-    Linking.openURL(phoneNumber)
+    let goToPhone = `tel:${phoneNumber}`;
+    Linking.openURL(goToPhone)
   }
 
   return (
@@ -42,19 +53,17 @@ const ContactScreen = props => {
 
           {/* Field Of Work */}
           <View style={styles.innerInfo}>
-            <Text>
-              <Image source={FieldOfWork}
-                style={{ width: 30, height: 30, resizeMode: 'contain' }}
-              />{field}
-            </Text>
+            <Text style={styles.innerInfoTxt}>{field}</Text>
+            <Image source={FieldOfWork}
+              style={{ width: 30, height: 30, resizeMode: 'contain' }}
+            />
           </View>
           {/* Experience */}
           <View style={styles.innerInfo}>
-            <Text>
-              <Image source={behavior}
-                style={{ width: 30, height: 30, resizeMode: 'contain' }}
-              />{experience + ` سنين خبرة `}
-            </Text>
+            <Text style={styles.innerInfoTxt}>{experience + ` سنين خبرة `}</Text>
+            <Image source={behavior}
+              style={{ width: 30, height: 30, resizeMode: 'contain' }}
+            />
           </View>
 
         </View>
@@ -64,18 +73,16 @@ const ContactScreen = props => {
         <View style={styles.secondColumn}>
           {/* Location */}
           <View style={styles.innerInfo}>
-            <Text>
-              <Image source={Location}
-                style={{ width: 30, height: 30, resizeMode: 'contain' }}
-              />{location}</Text>
+            <Text style={styles.innerInfoTxt}>{location}</Text>
+            <Image source={Location}
+              style={{ width: 30, height: 30, resizeMode: 'contain' }} />
           </View>
           {/* Fare */}
           <View style={styles.innerInfo}>
-            <Text>
-              <Image source={money}
-                style={{ width: 30, height: 30, resizeMode: 'contain' }}
-              />{hourlyFare + ` دينار بالساعة `}
-            </Text>
+            <Text style={styles.innerInfoTxt}>{hourlyFare + ` دينار بالساعة `}</Text>
+            <Image source={money}
+              style={{ width: 30, height: 30, resizeMode: 'contain' }}
+            />
           </View>
 
         </View>
@@ -91,12 +98,6 @@ const ContactScreen = props => {
           style={styles.callBtn}
         >
           <Text style={styles.btnText}>إتصال</Text>
-        </TouchableOpacity>
-        {/* Cancel Button */}
-        <TouchableOpacity
-          style={styles.cancelBtn}
-        >
-          <Text style={styles.btnText}>إلغاء</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -117,18 +118,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFE346',
     alignItems: 'center',
     justifyContent: 'center',
-
   },
   info: {
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    // justifyContent: 'center',
+    // alignItems: 'center',
     width: 350,
     height: 200,
     backgroundColor: 'white',
     borderColor: '#FFE346',
     borderRadius: 10,
-    borderWidth: 1,
+    borderWidth: 2,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.8,
@@ -137,20 +137,26 @@ const styles = StyleSheet.create({
     marginTop: 10
   },
   firstColumn: {
-    width: '100%',
-    justifyContent: 'flex-end',
-    margin: 8,
+    flex: 1,
+    width: '40%',
+    margin: 12,
+    justifyContent: 'space-around',
   },
   secondColumn: {
-    width: '100%',
-    justifyContent: 'flex-start',
-    margin: 8,
+    flex: 1,
+    width: '40%',
+    margin: 12,
+    justifyContent: 'space-around',
   },
   innerInfo: {
     width: '100%',
-    justifyContent: 'space-around',
+    justifyContent: 'flex-end',
     flexDirection: 'row',
-    alignItems: 'baseline',
+    alignItems: 'center',
+  },
+  innerInfoTxt: {
+    fontSize: 18,
+    marginRight: 8
   },
   btns: {
     marginTop: 15,
@@ -180,7 +186,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   btnText: {
-    fontSize: 22
+    fontSize: 26,
+    fontWeight: 'bold'
   },
 
   personalInfo: {

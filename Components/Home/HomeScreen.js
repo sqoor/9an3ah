@@ -56,8 +56,11 @@ const HomeScreen = props => {
             <WorkerListItem
               img={result.item.img} // Undefined
               name={result.item.fullName}
+              phoneNumber= {result.item.phoneNumber}
               field={result.item.field}
               location={result.item.location}
+              experience = {result.item.experience}
+              fare = {result.item.hourlyFare}
               {...props}
             />
           )}

@@ -4,7 +4,14 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 const WorkerListItem = (props) => {
     const img = require("../../assets/Home/avatar.png")
     return (
-        <TouchableOpacity style={styles.item} onPress={() => props.navigation.navigate('Details')}>
+        <TouchableOpacity style={styles.item} onPress={() => props.navigation.navigate('Details', {
+            fullName: props.name,
+            phoneNumber: props.phoneNumber,
+            field: props.field,
+            location: props.location,
+            experience: props.experience,
+            hourlyFare: props.fare,
+        })}>
             <View >
                 <Image style={styles.img} source={img} />
                 <View style={styles.txtContainer}>
