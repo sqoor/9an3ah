@@ -40,7 +40,7 @@ export default class Header extends Component {
               width: 70,
               height: 70
             }}
-            onPress={() => this.props.navigation.navigate("Profile")}
+            onPress={() => this.props.navigation.navigate("SignUp")}
           >
             <Image
               style={styles.profileIcon}
