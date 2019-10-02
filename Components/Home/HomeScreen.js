@@ -25,17 +25,15 @@ const HomeScreen = props => {
 
 
   const filterWorkers = (filter) => {
-    if(!originalWorkers) 
+    if (!originalWorkers)
       return "originalWorkers empty"
-    
+
     const filteredWorkers = originalWorkers.filter(worker => {
-        const locationCondition = filter.location ? worker.location === filter.location : true; 
-        const fieldCondition = filter.field ? worker.field === filter.field : true; 
+      const locationCondition = filter.location ? worker.location === filter.location : true;
+      const fieldCondition = filter.field ? worker.field === filter.field : true;
 
-        return locationCondition && fieldCondition  
-      }
-    )
-
+      return locationCondition && fieldCondition
+    })
     setWorkers(filteredWorkers)
   }
 
@@ -56,11 +54,11 @@ const HomeScreen = props => {
             <WorkerListItem
               img={result.item.img} // Undefined
               name={result.item.fullName}
-              phoneNumber= {result.item.phoneNumber}
+              phoneNumber={result.item.phoneNumber}
               field={result.item.field}
               location={result.item.location}
-              experience = {result.item.experience}
-              fare = {result.item.hourlyFare}
+              experience={result.item.experience}
+              fare={result.item.hourlyFare}
               {...props}
             />
           )}
@@ -71,35 +69,6 @@ const HomeScreen = props => {
 };
 
 const styles = StyleSheet.create({
-  bar: {
-    backgroundColor: "#FFE346",
-    height: "28%",
-    width: "100%"
-  },
-  searchSection: {
-    marginTop: 38,
-    marginLeft: 10,
-    marginRight: 10,
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center"
-  },
-  input: {
-    flex: 2.5,
-    paddingTop: 10,
-    paddingRight: 20,
-    paddingBottom: 10,
-    paddingLeft: 10,
-    backgroundColor: "#FFF",
-    color: "#424242",
-    borderRadius: 25
-  },
-  profileIcon: {
-    flex: 0.5,
-    width: 40,
-    height: 40,
-    resizeMode: "contain"
-  },
   list: {
     marginTop: 225
   }
