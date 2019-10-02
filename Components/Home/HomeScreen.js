@@ -7,6 +7,7 @@ import axios from "axios";
 const HomeScreen = props => {
   // Hook State To Contain Array Of Workers.
   const [workers, setWorkers] = useState("");
+  const [originalWorkers, setOriginalWorkers] = useState("");
 
   // @METHOD GET
   // Fetch Workers Data From Database.
@@ -15,10 +16,27 @@ const HomeScreen = props => {
       .get("https://san3ah.herokuapp.com/workers")
       .then(response => {
         setWorkers(response.data);
+        setOriginalWorkers(response.data);
       })
       .catch(error => {
         alert(error);
       });
+  }
+
+
+  const filterWorkers = (filter) => {
+    if(!originalWorkers) 
+      return "originalWorkers empty"
+    
+    const filteredWorkers = originalWorkers.filter(worker => {
+        const locationCondition = filter.location ? worker.location === filter.location : true; 
+        const fieldCondition = filter.field ? worker.field === filter.field : true; 
+
+        return locationCondition && fieldCondition  
+      }
+    )
+
+    setWorkers(filteredWorkers)
   }
 
   // Execute "fetchData" Method Once The Component Open.
@@ -26,7 +44,7 @@ const HomeScreen = props => {
 
   return (
     <View>
-      <Header {...props} />
+      <Header {...props} filterWorkers={filterWorkers} />
       <View style={styles.list}>
         {/* Workers List */}
 
@@ -80,7 +98,7 @@ const styles = StyleSheet.create({
     resizeMode: "contain"
   },
   list: {
-    marginTop: 255
+    marginTop: 200
   }
 });
 
