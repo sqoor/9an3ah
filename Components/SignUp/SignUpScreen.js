@@ -50,7 +50,7 @@ class SignUpScreen extends React.Component {
         console.log('res.data', res.data);
         if (res.data) {
           this.setUser();
-          alert(`Welcome ${res.data[0].fullName}`); 
+          alert(`مرحبا ${res.data[0].fullName}`); 
           this.props.navigation.navigate('Profile');
         }
         

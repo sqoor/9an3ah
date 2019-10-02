@@ -36,7 +36,7 @@ class LoginScreen extends React.Component {
       .then(res => {
         if (res.data.length) {
           this.setUser();
-          alert(`Welcome ${res.data[0].fullName}`);
+          alert(`مرحبا ${res.data[0].fullName}`);
           this.props.navigation.navigate('Profile');
         }
           else alert("Email and password do not match");
