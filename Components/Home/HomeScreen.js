@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     resizeMode: "contain"
   },
   list: {
-    marginTop: 200
+    marginTop: 225
   }
 });
 

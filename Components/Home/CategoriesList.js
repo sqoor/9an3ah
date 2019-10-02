@@ -33,7 +33,7 @@ const CategoriesList = props => {
         />
         <CategoryItem
           img={require("../../assets/Home/cargo.png")}
-          title="فصير"
+          title="قصير"
           pickField={props.pickField}
         />
         <CategoryItem
