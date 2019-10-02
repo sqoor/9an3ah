@@ -7,7 +7,7 @@ const CategoriesList = props => {
     <View style={styles.categoriesList}>
       <ScrollView horizontal={true}>
         <CategoryItem
-          img={require("../../assets/Home/parquet.png")}
+          img={require("../../assets/Home/clear-search.jpeg")}
           title=""
           pickField={props.pickField}
         />
