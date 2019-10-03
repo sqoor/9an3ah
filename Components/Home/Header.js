@@ -48,7 +48,6 @@ export default class Header extends Component {
             onPress={() => {
               AsyncStorage.getItem("user")
               .then(user => {
-                console.log("user", user)
                 const gotTo = user ? "Profile" : "Login";
                 this.props.navigation.navigate(gotTo)
               })
