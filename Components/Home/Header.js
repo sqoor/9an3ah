@@ -29,9 +29,9 @@ export default class Header extends Component {
 
 
   isUserLogged = () => {
-    
+
   }
-  
+
 
   render() {
     return (
@@ -47,12 +47,12 @@ export default class Header extends Component {
             }}
             onPress={() => {
               AsyncStorage.getItem("user")
-              .then(user => {
-                const gotTo = user ? "Profile" : "Login";
-                this.props.navigation.navigate(gotTo)
-              })
-              .catch(err => console.log(err));
-              }
+                .then(user => {
+                  const gotTo = user ? "Profile" : "Login";
+                  this.props.navigation.navigate(gotTo)
+                })
+                .catch(err => console.log(err));
+            }
             }
           >
             <Image
