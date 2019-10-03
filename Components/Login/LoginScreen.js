@@ -5,7 +5,8 @@ import {
   StyleSheet,
   Text,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  AsyncStorage
 } from "react-native";
 
 import axios from "axios";
@@ -18,6 +19,11 @@ class LoginScreen extends React.Component {
     password: ""
   };
 
+  setUser(loggedUser) {
+    loggedUser = JSON.stringify(loggedUser);
+    AsyncStorage.setItem("user", loggedUser);
+  }
+
   submitHandler = e => {
     const user = {
       email: this.state.email.trim().toLowerCase(),
@@ -25,20 +31,21 @@ class LoginScreen extends React.Component {
     };
 
     axios
-      // .post("https://san3ah.herokuapp.com/auth", user)
-      .post("http://192.168.43.147:9000/auth", user)
+      // .post("http://192.168.43.147:9000/auth", user)
+      .post("https://san3ah.herokuapp.com/auth", user)
       .then(res => {
-        if (res.data.length) alert(`Welcome ${res.data[0].fullName}`);
-        else alert("Email and password do not match");
+        if (res.data.length) {
+          this.setUser(res.data[0]);
+          alert(`مرحبا ${res.data[0].fullName}`);
+          this.props.navigation.navigate("Profile");
+        } else alert("Email and password do not match");
       })
       .catch(err => console.log("ERROR", err));
   };
 
-
   goToSignUp = () => {
-    this.props.navigation.navigate("SignUp")
-  }
-
+    this.props.navigation.navigate("SignUp");
+  };
 
   render() {
     return (
@@ -72,12 +79,12 @@ class LoginScreen extends React.Component {
         </View>
 
         <View style={styles.inputGroup}>
-            <TouchableOpacity onPress={this.goToSignUp}>
-              <Text style={{color: "white", fontWeight: "bold"}}>مستخدم جديد؟</Text>
-            </TouchableOpacity>
-          </View>
-
-
+          <TouchableOpacity onPress={this.goToSignUp}>
+            <Text style={{ color: "white", fontWeight: "bold" }}>
+              مستخدم جديد؟
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }

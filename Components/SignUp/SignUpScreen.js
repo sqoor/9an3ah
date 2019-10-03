@@ -26,6 +26,10 @@ class SignUpScreen extends React.Component {
     field: ""
   };
 
+  setUser() {
+    AsyncStorage.setItem('user', 'user');
+  }
+
   submitHandler = () => {
     console.log('submit handler worked')
     const newUser = {
@@ -38,14 +42,18 @@ class SignUpScreen extends React.Component {
       experience: this.state.experience.trim().toLowerCase(),
       field: this.state.field.trim().toLowerCase()
     };
-
     
     axios
       .post("https://san3ah.herokuapp.com/workers", newUser)
       .then(res => {
         console.log('newUser', newUser);
         console.log('res.data', res.data);
-        if (res.data) alert(`Welcome ${res.data[0].fullName}`);
+        if (res.data) {
+          this.setUser();
+          alert(`مرحبا ${res.data[0].fullName}`); 
+          this.props.navigation.navigate('Profile');
+        }
+        
         else alert("Email and password do not match");
       })
       .catch(err => console.log("ERROR", err));
