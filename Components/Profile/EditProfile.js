@@ -1,47 +1,45 @@
 import React, { Component } from 'react';
-import {Text, TextInput, View, ScrollView, TouchableOpacity } from 'react-native'
+import { Text, TextInput, View, ScrollView, TouchableOpacity } from 'react-native'
 import { Dropdown } from 'react-native-material-dropdown';
 
 
 export default class EditProfile extends Component {
   render() {
-    let data = [{
-      value: 'عمّان'
-    }, {
-      value: 'اربد'
-    }, {
-      value: 'السلط'
-    }, {
-      value: 'العقبة'
-    }, {
-      value: 'مفرق'
-    }, {
-      value: 'الزرقاء'
-    }, {
-      value: 'الطفيلة'
-    }, {
-      value: 'الكرك'
-    }, {
-      value: 'جرش'
-    }, {
-      value: 'مادبا'
-    }, {
-      value: 'عجلون'
-    }];
+    let data = [
+      { value: 'عمّان' },
+      { value: 'اربد' },
+      { value: 'السلط' },
+      {
+        value: 'العقبة'
+      }, {
+        value: 'مفرق'
+      }, {
+        value: 'الزرقاء'
+      }, {
+        value: 'الطفيلة'
+      }, {
+        value: 'الكرك'
+      }, {
+        value: 'جرش'
+      }, {
+        value: 'مادبا'
+      }, {
+        value: 'عجلون'
+      }];
 
 
-    let data2 = [{
-      value: 'نجّار'
-    },
-    { value: 'حدّاد' },
-    { value: 'بلّيط' },
-    { value: 'دهّين' },
-    { value: 'بنّاء' },
-    { value: 'ونش' },
-    { value: 'قصّير' },
-    { value: 'مواسرجي' },
-    { value: 'كهربجي' },
-    { value: 'ميكانيكي' }]
+    let data2 = [
+      { value: 'نجّار' },
+      { value: 'حدّاد' },
+      { value: 'بلّيط' },
+      { value: 'دهّين' },
+      { value: 'بنّاء' },
+      { value: 'ونش' },
+      { value: 'قصّير' },
+      { value: 'مواسرجي' },
+      { value: 'كهربجي' },
+      { value: 'ميكانيكي' }
+    ]
 
 
 
