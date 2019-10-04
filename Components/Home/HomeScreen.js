@@ -23,7 +23,10 @@ const HomeScreen = props => {
       });
   }
 
+  // Execute "fetchData" Method Once The Component Open.
+  useEffect(() => fetchData(), []);
 
+  // Handle Workers Filter.
   const filterWorkers = (filter) => {
     if (!originalWorkers)
       return "originalWorkers empty"
@@ -36,10 +39,7 @@ const HomeScreen = props => {
     })
     setWorkers(filteredWorkers)
   }
-
-  // Execute "fetchData" Method Once The Component Open.
-  useEffect(() => fetchData(), []);
-
+  
   return (
     <View>
       <Header {...props} filterWorkers={filterWorkers} />

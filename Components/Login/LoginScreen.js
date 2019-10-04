@@ -19,8 +19,11 @@ class LoginScreen extends React.Component {
     password: ""
   };
 
+  // Authenticate Users. 
   setUser(loggedUser) {
+    //Convert User Data To 'JSON'.
     loggedUser = JSON.stringify(loggedUser);
+    //Store User Data In "AsyncStorage" After Logging In. 
     AsyncStorage.setItem("user", loggedUser);
   }
 
@@ -31,7 +34,6 @@ class LoginScreen extends React.Component {
     };
 
     axios
-      // .post("http://192.168.43.147:9000/auth", user)
       .post("https://san3ah.herokuapp.com/auth", user)
       .then(res => {
         if (res.data.length) {
@@ -43,6 +45,7 @@ class LoginScreen extends React.Component {
       .catch(err => console.log("ERROR", err));
   };
 
+  // Navigate To Sign Up Screen.
   goToSignUp = () => {
     this.props.navigation.navigate("SignUp");
   };

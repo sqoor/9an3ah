@@ -18,6 +18,7 @@ export default class Header extends Component {
     };
   }
 
+  // Filter Workers Depending On field Of Work.
   pickField = async field => {
     await this.setState({ field });
     this.filterWorkers();

@@ -16,7 +16,7 @@ const ContactScreen = props => {
   const [field, setField] = useState("نجّار");
   const [hourlyFare, setHourlyFare] = useState(20);
 
-
+  // Destructing The 'Navigation' From 'Props'
   const { navigation } = props;
 
   useEffect(() => {
@@ -28,6 +28,7 @@ const ContactScreen = props => {
     setHourlyFare(navigation.getParam('hourlyFare'));
   }, [])
 
+  // Method To Open Phone App. 
   calling = () => {
     let goToPhone = `tel:${phoneNumber}`;
     Linking.openURL(goToPhone)
@@ -121,8 +122,6 @@ const styles = StyleSheet.create({
   },
   info: {
     flexDirection: 'row',
-    // justifyContent: 'center',
-    // alignItems: 'center',
     width: 350,
     height: 200,
     backgroundColor: 'white',
@@ -189,7 +188,6 @@ const styles = StyleSheet.create({
     fontSize: 26,
     fontWeight: 'bold'
   },
-
   personalInfo: {
     fontSize: 18,
   },
