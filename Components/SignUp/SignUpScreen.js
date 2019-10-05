@@ -10,9 +10,9 @@ import {
   Image
 } from "react-native";
 
-import axios from 'axios';
+import axios from "axios";
 
-import logo from './logo.png';
+import logo from "./logo.png";
 
 class SignUpScreen extends React.Component {
   state = {
@@ -28,11 +28,11 @@ class SignUpScreen extends React.Component {
 
   setUser(loggedUser) {
     loggedUser = JSON.stringify(loggedUser);
-    AsyncStorage.setItem('user', loggedUser);
+    AsyncStorage.setItem("user", loggedUser);
   }
 
   submitHandler = () => {
-    console.log('submit handler worked')
+    // console.log('submit handler worked')
     const newUser = {
       fullName: this.state.fullName.trim().toLowerCase(),
       email: this.state.email.trim().toLowerCase(),
@@ -43,33 +43,29 @@ class SignUpScreen extends React.Component {
       experience: this.state.experience.trim().toLowerCase(),
       field: this.state.field.trim().toLowerCase()
     };
-    
+
     axios
       .post("https://san3ah.herokuapp.com/workers", newUser)
       .then(res => {
-        console.log('newUser', newUser);
-        console.log('res.data', res.data);
+        // console.log('newUser', newUser);
+        // console.log('res.data', res.data);
         if (res.data) {
           this.setUser(this.state);
-          alert(`مرحبا ${res.data[0].fullName}`); 
-          this.props.navigation.navigate('Profile');
-        }
-        
-        else alert("Email and password do not match");
+          alert(`مرحبا ${res.data[0].fullName}`);
+          this.props.navigation.navigate("Profile");
+        } else alert("Email and password do not match");
       })
       .catch(err => console.log("ERROR", err));
   };
 
   goToLogin = () => {
-    this.props.navigation.navigate("Login")
-  }
-
+    this.props.navigation.navigate("Login");
+  };
 
   render() {
     return (
       <ScrollView>
         <View style={styles.container}>
-          
           <Image source={logo} style={styles.logo} />
 
           <View style={styles.inputGroup}>
@@ -171,7 +167,7 @@ class SignUpScreen extends React.Component {
               value={this.state.hourlyFare}
               placeholder="دينار اردني"
               style={styles.input}
-              onChangeText={text => console.log(text)}
+              // onChangeText={text => console.log(text)}
               onChangeText={text => this.setState({ hourlyFare: text })}
             />
           </View>
@@ -184,7 +180,9 @@ class SignUpScreen extends React.Component {
 
           <View style={styles.inputGroup}>
             <TouchableOpacity onPress={this.goToLogin}>
-              <Text style={{color: "white", fontWeight: "bold"}}>هل انت مستخدم؟</Text>
+              <Text style={{ color: "white", fontWeight: "bold" }}>
+                هل انت مستخدم؟
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
