@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, FlatList } from "react-native";
+import { View, StyleSheet, FlatList, AsyncStorage } from "react-native";
 import Header from "./Header";
 import WorkerListItem from "./WorkerListItem";
 import axios from "axios";
@@ -23,23 +23,25 @@ const HomeScreen = props => {
       });
   }
 
-  // Execute "fetchData" Method Once The Component Open.
-  useEffect(() => fetchData(), []);
-
-  // Handle Workers Filter.
-  const filterWorkers = (filter) => {
-    if (!originalWorkers)
-      return "originalWorkers empty"
+  const filterWorkers = filter => {
+    if (!originalWorkers) return "originalWorkers empty";
 
     const filteredWorkers = originalWorkers.filter(worker => {
-      const locationCondition = filter.location ? worker.location === filter.location : true;
-      const fieldCondition = filter.field ? worker.field === filter.field : true;
+      const locationCondition = filter.location
+        ? worker.location === filter.location
+        : true;
+      const fieldCondition = filter.field
+        ? worker.field === filter.field
+        : true;
 
-      return locationCondition && fieldCondition
-    })
-    setWorkers(filteredWorkers)
-  }
-  
+      return locationCondition && fieldCondition;
+    });
+    setWorkers(filteredWorkers);
+  };
+
+  // Execute "fetchData" Method Once The Component Open.
+  useEffect(() => fetchData(), [props.navigation.getParam("user")]);
+
   return (
     <View>
       <Header {...props} filterWorkers={filterWorkers} />
