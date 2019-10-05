@@ -7,7 +7,8 @@ import {
   Picker,
   TouchableOpacity,
   ScrollView,
-  Image
+  Image,
+  AsyncStorage
 } from "react-native";
 
 import axios from "axios";
@@ -32,7 +33,6 @@ class SignUpScreen extends React.Component {
   }
 
   submitHandler = () => {
-    // console.log('submit handler worked')
     const newUser = {
       fullName: this.state.fullName.trim().toLowerCase(),
       email: this.state.email.trim().toLowerCase(),
@@ -47,11 +47,9 @@ class SignUpScreen extends React.Component {
     axios
       .post("https://san3ah.herokuapp.com/workers", newUser)
       .then(res => {
-        // console.log('newUser', newUser);
-        // console.log('res.data', res.data);
         if (res.data) {
           this.setUser(this.state);
-          alert(`مرحبا ${res.data[0].fullName}`);
+          alert(`مرحبا ${res.data.fullName}`);
           this.props.navigation.navigate("Profile");
         } else alert("Email and password do not match");
       })
@@ -167,7 +165,6 @@ class SignUpScreen extends React.Component {
               value={this.state.hourlyFare}
               placeholder="دينار اردني"
               style={styles.input}
-              // onChangeText={text => console.log(text)}
               onChangeText={text => this.setState({ hourlyFare: text })}
             />
           </View>
