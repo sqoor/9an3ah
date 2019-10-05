@@ -1,11 +1,9 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
   StyleSheet,
   Image,
-  Platform,
-  Linking,
   TouchableOpacity,
   AsyncStorage
 } from "react-native";
@@ -16,163 +14,150 @@ import Location from "../../assets/ContactModal/Location.png";
 import behavior from "../../assets/ContactModal/behavior.png";
 import money from "../../assets/ContactModal/money.png";
 
-class ProfileScreen extends Component {
-  state = {
+const ProfileScreen = props => {
+  const [user, setUser] = useState({
     fullName: "مصطفى",
     phoneNumber: "0777753111",
     field: "كهربجي",
     location: "جرش",
     experience: 3,
     hourlyFare: 22
+  });
+
+  useEffect(() => {
+    AsyncStorage.getItem("user")
+      .then(user => {
+        user = JSON.parse(user);
+        setUser(user); // user
+      })
+      .catch(err => {
+        console.log("Error", err);
+      });
+  }, [props.navigation.getParam("user"), props.navigation.getParam("user")]);
+
+  const goHome = () => {
+    props.navigation.navigate("Home", { user });
   };
 
-  async componentDidMount() {
-    let loggedUser = await AsyncStorage.getItem("user");
-    loggedUser = JSON.parse(loggedUser);
-
-    this.setState({
-      fullName: loggedUser.fullName,
-      phoneNumber: loggedUser.phoneNumber,
-      field: loggedUser.field,
-      location: loggedUser.location,
-      experience: loggedUser.experience,
-      hourlyFare: loggedUser.hourlyFare
-    });
-  }
-
-  goHome = () => {
-    this.props.navigation.navigate("Home");
-  };
-
-  logOut = () => {
+  const logOut = () => {
     AsyncStorage.clear();
-    this.props.navigation.navigate("Home");
+    props.navigation.navigate("Home", { user });
   };
 
-  render() {
-    const {
-      fullName,
-      phoneNumber,
-      field,
-      experience,
-      location,
-      hourlyFare
-    } = this.state;
-    return (
-      <View style={styles.container}>
-        {/* Header */}
-        <View style={styles.header}>
-          <View
-            stle={{ flexDirection: "column", justifyContent: "space-between" }}
-          >
-            <TouchableOpacity onPress={this.goHome}>
-              <Text
-                style={{
-                  textAlign: "center",
-                  color: "white",
-                  fontWeight: "bold",
-                  padding: 5,
-                  margin: 7,
-                  borderColor: "red",
-                  borderRadius: 10,
-                  borderWidth: 1,
-                  width: 74
-                }}
-              >
-                Home
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this.logOut}>
-              <Text
-                style={{
-                  textAlign: "center",
-                  color: "white",
-                  fontWeight: "bold",
-                  padding: 5,
-                  margin: 7,
-                  borderColor: "red",
-                  borderRadius: 10,
-                  borderWidth: 1,
-                  width: 74
-                }}
-              >
-                Log out
-              </Text>
-            </TouchableOpacity>
-          </View>
-          <Image
-            source={avatar}
-            style={{ width: 100, height: 100, resizeMode: "contain" }}
-          />
-          <Text style={styles.personalInfo}>{fullName}</Text>
-          <Text style={styles.personalInfo}>{phoneNumber}</Text>
-        </View>
-        {/* End Header */}
-
-        {/* Information */}
-        <View style={styles.info}>
-          {/* First Column */}
-          <View style={styles.firstColumn}>
-            {/* Field Of Work */}
-            <View style={styles.innerInfo}>
-              <Text style={styles.innerInfoTxt}>{field}</Text>
-              <Image
-                source={FieldOfWork}
-                style={{ width: 30, height: 30, resizeMode: "contain" }}
-              />
-            </View>
-            {/* Experience */}
-            <View style={styles.innerInfo}>
-              <Text style={styles.innerInfoTxt}>
-                {experience + ` سنين خبرة `}
-              </Text>
-              <Image
-                source={behavior}
-                style={{ width: 30, height: 30, resizeMode: "contain" }}
-              />
-            </View>
-          </View>
-          {/* End First Row */}
-
-          {/* Second Column */}
-          <View style={styles.secondColumn}>
-            {/* Location */}
-            <View style={styles.innerInfo}>
-              <Text style={styles.innerInfoTxt}>{location}</Text>
-              <Image
-                source={Location}
-                style={{ width: 30, height: 30, resizeMode: "contain" }}
-              />
-            </View>
-            {/* Fare */}
-            <View style={styles.innerInfo}>
-              <Text style={styles.innerInfoTxt}>
-                {hourlyFare + ` دينار بالساعة `}
-              </Text>
-              <Image
-                source={money}
-                style={{ width: 30, height: 30, resizeMode: "contain" }}
-              />
-            </View>
-          </View>
-          {/* End Second Row */}
-        </View>
-        {/* End Information */}
-
-        {/* Buttons */}
-        <View style={styles.btns}>
-          {/* Call Button */}
-          <TouchableOpacity
-            onPress={() => this.props.navigation.navigate("EditProfile")}
-            style={styles.callBtn}
-          >
-            <Text style={styles.btnText}>تعديل</Text>
+  return (
+    <View style={styles.container}>
+      {/* Header */}
+      <View style={styles.header}>
+        <View
+          style={{ width: "90%", flexDirection: "row", justifyContent: "space-between"}}
+        >
+          <TouchableOpacity onPress={goHome}>
+            <Text
+              style={{
+                textAlign: "center",
+                color: "white",
+                fontWeight: "bold",
+                padding: 5,
+                margin: 7,
+                borderColor: "red",
+                borderRadius: 10,
+                borderWidth: 1,
+                width: 74
+              }}
+            >
+              Home
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={logOut}>
+            <Text
+              style={{
+                textAlign: "center",
+                color: "white",
+                fontWeight: "bold",
+                padding: 5,
+                margin: 7,
+                borderColor: "red",
+                borderRadius: 10,
+                borderWidth: 1,
+                width: 74
+              }}
+            >
+              Log out
+            </Text>
           </TouchableOpacity>
         </View>
+        <Image
+          source={avatar}
+          style={{ width: 100, height: 100, resizeMode: "contain" }}
+        />
+        <Text style={styles.personalInfo}>{user.fullName}</Text>
+        <Text style={styles.personalInfo}>{user.phoneNumber}</Text>
       </View>
-    );
-  }
-}
+      {/* End Header */}
+
+      {/* Information */}
+      <View style={styles.info}>
+        {/* First Column */}
+        <View style={styles.firstColumn}>
+          {/* Field Of Work */}
+          <View style={styles.innerInfo}>
+            <Text style={styles.innerInfoTxt}>{user.field}</Text>
+            <Image
+              source={FieldOfWork}
+              style={{ width: 30, height: 30, resizeMode: "contain" }}
+            />
+          </View>
+          {/* Experience */}
+          <View style={styles.innerInfo}>
+            <Text style={styles.innerInfoTxt}>
+              {user.experience + ` سنين خبرة `}
+            </Text>
+            <Image
+              source={behavior}
+              style={{ width: 30, height: 30, resizeMode: "contain" }}
+            />
+          </View>
+        </View>
+        {/* End First Row */}
+
+        {/* Second Column */}
+        <View style={styles.secondColumn}>
+          {/* Location */}
+          <View style={styles.innerInfo}>
+            <Text style={styles.innerInfoTxt}>{user.location}</Text>
+            <Image
+              source={Location}
+              style={{ width: 30, height: 30, resizeMode: "contain" }}
+            />
+          </View>
+          {/* Fare */}
+          <View style={styles.innerInfo}>
+            <Text style={styles.innerInfoTxt}>
+              {user.hourlyFare + ` دينار بالساعة `}
+            </Text>
+            <Image
+              source={money}
+              style={{ width: 30, height: 30, resizeMode: "contain" }}
+            />
+          </View>
+        </View>
+        {/* End Second Row */}
+      </View>
+      {/* End Information */}
+
+      {/* Buttons */}
+      <View style={styles.btns}>
+        {/* Call Button */}
+        <TouchableOpacity
+          onPress={() => props.navigation.navigate("EditProfile")}
+          style={styles.callBtn}
+        >
+          <Text style={styles.btnText}>تعديل</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -266,6 +251,3 @@ const styles = StyleSheet.create({
 });
 
 export default ProfileScreen;
-
-/*
- */
