@@ -1,17 +1,17 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Text,
   TextInput,
   View,
   ScrollView,
   TouchableOpacity,
-  AsyncStorage
+  AsyncStorage,
+  Picker
 } from "react-native";
 import Axios from "axios";
-import { Dropdown } from "react-native-material-dropdown";
 
-export default class EditProfile extends Component {
-  state = {
+export default EditProfile = props => {
+  const [updatedUser, setUpdatedUser] = useState({
     _id: "",
     email: "",
     experience: "",
@@ -21,228 +21,224 @@ export default class EditProfile extends Component {
     location: "",
     password: "",
     phoneNumber: ""
-  };
+  });
+  const [loggedUser, setLoggedUser] = useState({});
 
-  async componentDidMount() {
-    let loggedUser = await AsyncStorage.getItem("user");
-    loggedUser = JSON.parse(loggedUser);
+  useEffect(() => {
+    AsyncStorage.getItem("user")
+      .then(user => {
+        user = JSON.parse(user);
+        setLoggedUser(user);
 
-    this.setState({
-      _id: loggedUser._id,
-      email: loggedUser.email,
-      experience: loggedUser.experience,
-      field: loggedUser.field,
-      fullName: loggedUser.fullName,
-      hourlyFare: loggedUser.hourlyFare,
-      location: loggedUser.location,
-      password: loggedUser.password,
-      phoneNumber: loggedUser.phoneNumber
-    });
-  }
+        setUpdatedUser({
+          _id: user._id,
+          email: user.email,
+          experience: user.experience,
+          field: user.field,
+          fullName: user.fullName,
+          hourlyFare: user.hourlyFare,
+          location: user.location,
+          password: user.password,
+          phoneNumber: user.phoneNumber
+        });
+      })
+      .catch(err => console.log("ERROR", err));
+  }, [props.navigation.getParam("user")]);
 
-  submitEdit = async () => {
-    let loggedUser = await AsyncStorage.getItem("user");
-    loggedUser = JSON.parse(loggedUser);
-
+  const submitEdit = async () => {
     Axios.put(
       "https://san3ah.herokuapp.com/workers/" + loggedUser._id,
-      this.state
+      updatedUser
     )
-      .then(res => {
-        let updatedUser = res.data.filter(worker => worker._id === loggedUser._id)[0];
-        updatedUser = JSON.stringify(updatedUser);
-        AsyncStorage.setItem('user', updatedUser);
+      .then(async res => {
+        let returnedUser = res.data.filter(
+          worker => worker._id === loggedUser._id
+        )[0];
+        returnedUser = JSON.stringify(returnedUser);
+        await AsyncStorage.setItem("user", returnedUser);
 
-        this.props.navigation.navigate('Profile');
+        props.navigation.navigate("Profile", {
+          user: returnedUser
+        });
       })
       .catch(err => console.log("Error", err));
   };
 
-  render() {
-    let data = [
-      {
-        value: "عمّان"
-      },
-      {
-        value: "اربد"
-      },
-      {
-        value: "السلط"
-      },
-      {
-        value: "العقبة"
-      },
-      {
-        value: "مفرق"
-      },
-      {
-        value: "الزرقاء"
-      },
-      {
-        value: "الطفيلة"
-      },
-      {
-        value: "الكرك"
-      },
-      {
-        value: "جرش"
-      },
-      {
-        value: "مادبا"
-      },
-      {
-        value: "عجلون"
-      }
-    ];
-
-    let data2 = [
-      {
-        value: "نجّار"
-      },
-      { value: "حدّاد" },
-      { value: "بلّيط" },
-      { value: "دهّين" },
-      { value: "بنّاء" },
-      { value: "ونش" },
-      { value: "قصّير" },
-      { value: "مواسرجي" },
-      { value: "كهربجي" },
-      { value: "ميكانيكي" }
-    ];
-
-    return (
-      <ScrollView style={{ marginVertical: 20 }}>
-        <View
-          style={{
-            marginTop: 22,
-            backgroundColor: "#FFE346",
-            height: "100%"
-          }}
-        >
-          <View style={{ alignItems: "center" }}>
-            <Text style={{ color: "white", fontSize: 22 }}>الاسم</Text>
-            <TextInput
-              style={{
-                backgroundColor: "white",
-                width: "80%",
-                borderRadius: 5,
-                fontSize: 24
-              }}
-              value={this.state.fullName}
-              onChangeText={fullName => this.setState({ fullName })}
-            />
-
-            <Text style={{ color: "white", fontSize: 22 }}>
-              البريد الالكتروني
-            </Text>
-            <TextInput
-              style={{
-                backgroundColor: "white",
-                width: "80%",
-                borderRadius: 5,
-                fontSize: 24
-              }}
-              value={this.state.email}
-              onChangeText={email => this.setState({ email })}
-            />
-
-            <Text style={{ color: "white", fontSize: 22 }}>كلمة السًر</Text>
-            <TextInput
-              style={{
-                backgroundColor: "white",
-                width: "80%",
-                borderRadius: 5,
-                fontSize: 24
-              }}
-            />
-
-            <Text style={{ color: "white", fontSize: 22 }}>رقم الهاتف</Text>
-            <TextInput
-              style={{
-                backgroundColor: "white",
-                width: "80%",
-                borderRadius: 5,
-                fontSize: 24
-              }}
-              value={this.state.phoneNumber + ""}
-              onChangeText={phoneNumber => this.setState({ phoneNumber })}
-            />
-
-            <Text style={{ color: "white", fontSize: 22 }}>المهنة</Text>
-
-            <Dropdown
-              data2={data2}
-              value={this.state.field}
-              onChangeText={field => this.setState({ field })}
-            />
-
-            <Text style={{ color: "white", fontSize: 22 }}>الموقع</Text>
-            <Dropdown
-              value={this.state.location}
-              onChangeText={location => this.setState({ location })}
-              label="أختر محافظة"
-              data={data}
-              style={{
-                backgroundColor: "red",
-                width: "40%",
-                borderRadius: 5,
-                fontSize: 10
-              }}
-            />
-
-            <Text style={{ color: "white", fontSize: 22 }}>
-              عدد سنوات الخبرة
-            </Text>
-            <TextInput
-              style={{
-                backgroundColor: "white",
-                width: "80%",
-                borderRadius: 5,
-                fontSize: 24
-              }}
-              value={this.state.experience + ""}
-              onChangeText={experience => this.setState({ experience })}
-            />
-
-            <Text style={{ color: "white", fontSize: 22 }}>
-              الأجرة في الساعة
-            </Text>
-            <TextInput
-              style={{
-                backgroundColor: "white",
-                width: "80%",
-                borderRadius: 5,
-                fontSize: 24
-              }}
-              value={this.state.hourlyFare + ""}
-              onChangeText={hourlyFare => this.setState({ hourlyFare })}
-            />
-          </View>
-
-          <TouchableOpacity
-            onPress={this.submitEdit}
+  return (
+    <View
+      style={{
+        paddingTop: 40,
+        paddingBottom: 40,
+        backgroundColor: "#FFE346",
+        height: "100%"
+      }}
+    >
+      <ScrollView>
+        <View style={{ alignItems: "center" }}>
+          <Text style={{ color: "white", fontSize: 22 }}>الاسم</Text>
+          <TextInput
             style={{
-              backgroundColor: "#FF7F90",
-              alignSelf: "center",
-              width: "30%",
-              marginTop: 25,
-              borderRadius: 5
+              backgroundColor: "white",
+              width: "80%",
+              borderRadius: 5,
+              fontSize: 24
             }}
+            value={updatedUser.fullName}
+            onChangeText={fullName =>
+              setUpdatedUser(prevState => {
+                return { ...prevState, fullName };
+              })
+            }
+          />
+
+          <Text style={{ color: "white", fontSize: 22 }}>
+            البريد الالكتروني
+          </Text>
+          <TextInput
+            style={{
+              backgroundColor: "white",
+              width: "80%",
+              borderRadius: 5,
+              fontSize: 24
+            }}
+            value={updatedUser.email}
+            onChangeText={email =>
+              setUpdatedUser(prevState => {
+                return { ...prevState, email };
+              })
+            }
+          />
+
+          <Text style={{ color: "white", fontSize: 22 }}>كلمة السًر</Text>
+          <TextInput
+            style={{
+              backgroundColor: "white",
+              width: "80%",
+              borderRadius: 5,
+              fontSize: 24
+            }}
+          />
+
+          <Text style={{ color: "white", fontSize: 22 }}>رقم الهاتف</Text>
+          <TextInput
+            style={{
+              backgroundColor: "white",
+              width: "80%",
+              borderRadius: 5,
+              fontSize: 24
+            }}
+            value={updatedUser.phoneNumber + ""}
+            onChangeText={phoneNumber =>
+              setUpdatedUser(prevState => {
+                return { ...prevState, phoneNumber };
+              })
+            }
+          />
+
+          {/* <Text style={{ color: "white", fontSize: 22 }}>المهنة</Text> */}
+
+          <Picker
+            selectedValue={updatedUser.field}
+            style={{ height: 50, width: 100, color: "white" }}
+            onValueChange={field =>
+              setUpdatedUser(prevState => {
+                return { ...prevState, field };
+              })
+            }
           >
-            <Text
-              style={{
-                width: "40%",
-                fontSize: 23,
-                alignSelf: "center",
-                alignContent: "center",
-                color: "white"
-              }}
-            >
-              حفظ
-            </Text>
-          </TouchableOpacity>
+            <Picker.Item label="المهنة" value="" />
+            <Picker.Item label="بليط" value="بليط" />
+            <Picker.Item label="دهين" value="دهين" />
+            <Picker.Item label="بناء" value="بناء" />
+            <Picker.Item label="ونش" value="ونش" />
+            <Picker.Item label="فصير" value="فصير" />
+            <Picker.Item label="مواسرجي" value="مواسرجي" />
+            <Picker.Item label="حداد" value="حداد" />
+            <Picker.Item label="نجار" value="نجار" />
+            <Picker.Item label="كهربجي" value="كهربجي" />
+          </Picker>
+
+          {/* <Text style={{ color: "white", fontSize: 22 }}>الموقع</Text> */}
+
+          <Picker
+            selectedValue={updatedUser.location}
+            style={{ height: 50, width: 100, color: "white" }}
+            onValueChange={location =>
+              setUpdatedUser(prevState => {
+                return { ...prevState, location };
+              })
+            }
+          >
+            <Picker.Item label="الموقع" value="" />
+            <Picker.Item label="عمان" value="عمان" />
+            <Picker.Item label="اربد" value="اربد" />
+            <Picker.Item label="عجلون" value="عجلون" />
+            <Picker.Item label="جرش" value="جرش" />
+            <Picker.Item label="الطفيلة" value="الطفيلة" />
+            <Picker.Item label="السلط" value="السلط" />
+            <Picker.Item label="الكرك" value="الكرك" />
+            <Picker.Item label="العقبة" value="العقبة" />
+            <Picker.Item label="معان" value="معان" />
+            <Picker.Item label="الزرقاء" value="الزرقاء" />
+            <Picker.Item label="مادبا" value="مادبا" />
+            <Picker.Item label="المفرق" value="المفرق" />
+          </Picker>
+
+          <Text style={{ color: "white", fontSize: 22 }}>عدد سنوات الخبرة</Text>
+          <TextInput
+            style={{
+              backgroundColor: "white",
+              width: "80%",
+              borderRadius: 5,
+              fontSize: 24
+            }}
+            value={updatedUser.experience + ""}
+            onChangeText={experience =>
+              setUpdatedUser(prevState => {
+                return { ...prevState, experience };
+              })
+            }
+          />
+
+          <Text style={{ color: "white", fontSize: 22 }}>الأجرة في الساعة</Text>
+          <TextInput
+            style={{
+              backgroundColor: "white",
+              width: "80%",
+              borderRadius: 5,
+              fontSize: 24
+            }}
+            value={updatedUser.hourlyFare + ""}
+            onChangeText={hourlyFare =>
+              setUpdatedUser(prevState => {
+                return { ...prevState, hourlyFare };
+              })
+            }
+          />
         </View>
       </ScrollView>
-    );
-  }
-}
+      <TouchableOpacity
+        onPress={submitEdit}
+        style={{
+          backgroundColor: "#FF7F90",
+          alignSelf: "center",
+          width: "30%",
+          marginTop: 25,
+          borderRadius: 5
+        }}
+      >
+        <Text
+          style={{
+            width: "40%",
+            fontSize: 23,
+            alignSelf: "center",
+            alignContent: "center",
+            color: "white"
+          }}
+        >
+          حفظ
+        </Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
