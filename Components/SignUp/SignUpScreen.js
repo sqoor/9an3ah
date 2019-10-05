@@ -26,8 +26,9 @@ class SignUpScreen extends React.Component {
     field: ""
   };
 
-  setUser() {
-    AsyncStorage.setItem('user', 'user');
+  setUser(loggedUser) {
+    loggedUser = JSON.stringify(loggedUser);
+    AsyncStorage.setItem('user', loggedUser);
   }
 
   submitHandler = () => {
@@ -49,7 +50,7 @@ class SignUpScreen extends React.Component {
         console.log('newUser', newUser);
         console.log('res.data', res.data);
         if (res.data) {
-          this.setUser();
+          this.setUser(this.state);
           alert(`مرحبا ${res.data[0].fullName}`); 
           this.props.navigation.navigate('Profile');
         }
